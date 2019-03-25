@@ -119,14 +119,10 @@
 				$('a.add-pedido').removeClass('hide');
 			}
 			
-			if($(location).attr('pathname') === '/admin/clientes' || $(location).attr('pathname') === '/admin/productos' || $(location).attr('pathname') === '/admin/pedidos'){
+			if($(location).attr('pathname') === '/admin/clientes' || $(location).attr('pathname') === '/admin/productos' || $(location).attr('pathname') === '/admin/pedidos' || $(location).attr('pathname') === '/admin/user'){
 				$('a.return').css('display','block');
 				$('a.return span i.fa').addClass('fa-home');
 				$('a.return').attr('href',"/admin/dashboard");
-			}else if($(location).attr('pathname') === '/admin/user' || $(location).attr('pathname') === '/admin/role'){
-				$('a.return').css('display','block');
-				$('a.return span i.fa').addClass('fa-reply');
-				$('a.return').attr('href',"/admin/usuarios");
 			}else{
 				$('a.return').css('display','block');
 				$('a.return span i.fa').addClass('fa-home');

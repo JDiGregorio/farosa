@@ -119,39 +119,37 @@ class UserCrudController extends CrudController
 				],
 				// 'tab' => 'Datos generales',
 			],
-            [
-            // two interconnected entities
-            'label'             => trans('backpack::permissionmanager.user_role_permission'),
-            'field_unique_name' => 'user_role_permission',
-            'type'              => 'checklist_dependency_secondary_rows',
-            'name'              => 'roles_and_permissions', // the methods that defines the relationship in your Model
-            'subfields'         => [
-                    'primary' => [
-                        'label'            => trans('backpack::permissionmanager.roles'),
-                        'name'             => 'roles', // the method that defines the relationship in your Model
-                        'entity'           => 'roles', // the method that defines the relationship in your Model
-                        'entity_secondary' => 'permissions', // the method that defines the relationship in your Model
-                        'attribute'        => 'name', // foreign key attribute that is shown to user
-                        'model'            => config('permission.models.role'), // foreign key model
-                        'pivot'            => true, // on create&update, do you need to add/delete pivot table entries?]
-                        'number_columns'   => 3, //can be 1,2,3,4,6
-                    ],
-                    'secondary' => [
-                        'label'          => ucfirst(trans('backpack::permissionmanager.permission_singular')),
-                        'name'           => 'permissions', // the method that defines the relationship in your Model
-                        'entity'         => 'permissions', // the method that defines the relationship in your Model
-                        'entity_primary' => 'roles', // the method that defines the relationship in your Model
-                        'attribute'      => 'name', // foreign key attribute that is shown to user
-                        'model'          => config('permission.models.permission'), // foreign key model
-                        'pivot'          => true, // on create&update, do you need to add/delete pivot table entries?]
-                        'number_columns' => 3, //can be 1,2,3,4,6
-                    ],
-                ],
-				'wrapperAttributes' => [
-					'class' => 'form-group col-md-12',
-				],
-				// 'tab' => 'Roles y Permisos',
-            ],
+            // [
+				// 'label'             => trans('backpack::permissionmanager.user_role_permission'),
+				// 'field_unique_name' => 'user_role_permission',
+				// 'type'              => 'checklist_dependency_secondary_rows',
+				// 'name'              => 'roles_and_permissions',
+				// 'subfields'         => [
+                    // 'primary' => [
+                        // 'label'            => trans('backpack::permissionmanager.roles'),
+                        // 'name'             => 'roles', 
+                        // 'entity'           => 'roles', 
+                        // 'entity_secondary' => 'permissions', 
+                        // 'attribute'        => 'name', 
+                        // 'model'            => config('permission.models.role'), 
+                        // 'pivot'            => true, 
+                        // 'number_columns'   => 3,
+                    // ],
+                    // 'secondary' => [
+                        // 'label'          => ucfirst(trans('backpack::permissionmanager.permission_singular')),
+                        // 'name'           => 'permissions',
+                        // 'entity'         => 'permissions',
+                        // 'entity_primary' => 'roles',
+                        // 'attribute'      => 'name',
+                        // 'model'          => config('permission.models.permission'),
+                        // 'pivot'          => true,
+                        // 'number_columns' => 3,
+                    // ],
+                // ],
+				// 'wrapperAttributes' => [
+					// 'class' => 'form-group col-md-12',
+				// ],
+            // ],
         ]);
     }
 

@@ -29,7 +29,7 @@
 					</a>
 				</div>
 				<div class="col-md-6 col-xs-6 div-right">
-					<a href="{{ backpack_url('usuarios') }}">
+					<a href="{{ backpack_url('user') }}">
 						<div class="div-item-menu">
 							<div class="div-icon" style="background-image: url('/img/usuarios.png');"></div>
 							<h1 class="title-icon">Usuarios</h1>

@@ -51,10 +51,10 @@
 			$('a.return').css('display','block');
 			$('a.return span i.fa').addClass('fa-reply');
 			$('a.return').attr('href',"/admin/pedidos");
-		}else if($(location).attr('pathname') === '/admin/user/create' || $(location).attr('pathname') === '/admin/role/create'){
+		}else if($(location).attr('pathname') === '/admin/user/create'){
 			$('a.return').css('display','block');
 			$('a.return span i.fa').addClass('fa-reply');
-			$('a.return').attr('href',"/admin/usuarios");
+			$('a.return').attr('href',"/admin/user");
 		}else{
 			$('a.return').css('display','block');
 			$('a.return span i.fa').addClass('fa-home');

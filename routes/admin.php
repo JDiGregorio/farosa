@@ -5,8 +5,6 @@
 	Route::get('productos/{id}','ItemCrudController@get_item');
 	Route::get('cliente/saldo/{id}','CustomerCrudController@get_saldo');
 	
-	Route::get('usuarios', 'CustomerCrudController@menu_usuarios');
-	
 	CRUD::resource('clientes', 'CustomerCrudController');
 	CRUD::resource('productos', 'ItemCrudController');
 	CRUD::resource('pedidos', 'TransactionHoldCrudController');

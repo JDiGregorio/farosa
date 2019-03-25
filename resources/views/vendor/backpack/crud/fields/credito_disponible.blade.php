@@ -92,7 +92,7 @@
 				});
 				
 				function GetId(id) {
-					$.getJSON( "/farosa/public/admin/cliente/saldo/"+id, function(data) {
+					$.getJSON( "/admin/cliente/saldo/"+id, function(data) {
 						var dato = parseFloat(data[0].disponible).toFixed(2);
 						$("#response").text(dato);
 					});
