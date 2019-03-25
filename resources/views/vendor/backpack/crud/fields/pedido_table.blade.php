@@ -128,7 +128,6 @@
 					$('input[name="total_pedido"]').val("");
 					table.rows().remove().draw();
 					
-					
 					$(this.linea_pedido).each(function(key,val){
 						table.row.add([val.ID,val.Description,val.QuantityPurchased,val.Price,'']).draw();
 						total = total + val.QuantityPurchased * val.Price;
@@ -152,7 +151,7 @@
 				}
 				
 				Moneda(total) {
-					return total.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '1,');
+					return total.toFixed(2);
 				}
 				
 				getObjectIndex(arr, key, val){

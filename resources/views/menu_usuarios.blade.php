@@ -37,10 +37,10 @@
 
 @push('scripts')
 	<script>
-		if($(location).attr('pathname') === '/farosa/public/admin/usuarios'){
+		if($(location).attr('pathname') === '/admin/usuarios'){
 			$('a.return').css('display','block');
 			$('a.return span i.fa').addClass('fa-home');
-			$('a.return').attr('href',"/farosa/public/admin/dashboard");
+			$('a.return').attr('href',"/admin/dashboard");
 		}
 	</script>
 @endpush

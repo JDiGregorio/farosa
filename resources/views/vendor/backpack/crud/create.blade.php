@@ -47,18 +47,18 @@
 
 @push('scripts')
 	<script>
-		if($(location).attr('pathname') === '/farosa/public/admin/pedidos/create'){
+		if($(location).attr('pathname') === '/admin/pedidos/create'){
 			$('a.return').css('display','block');
 			$('a.return span i.fa').addClass('fa-reply');
-			$('a.return').attr('href',"/farosa/public/admin/pedidos");
-		}else if($(location).attr('pathname') === '/farosa/public/admin/user/create' || $(location).attr('pathname') === '/farosa/public/admin/role/create'){
+			$('a.return').attr('href',"/admin/pedidos");
+		}else if($(location).attr('pathname') === '/admin/user/create' || $(location).attr('pathname') === '/admin/role/create'){
 			$('a.return').css('display','block');
 			$('a.return span i.fa').addClass('fa-reply');
-			$('a.return').attr('href',"/farosa/public/admin/usuarios");
+			$('a.return').attr('href',"/admin/usuarios");
 		}else{
 			$('a.return').css('display','block');
 			$('a.return span i.fa').addClass('fa-home');
-			$('a.return').attr('href',"/farosa/public/admin/dashboard");
+			$('a.return').attr('href',"/admin/dashboard");
 		}
 	</script>
 @endpush

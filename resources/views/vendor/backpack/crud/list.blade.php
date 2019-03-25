@@ -115,25 +115,23 @@
   
 	@push('scripts')
 		<script>
-			if($(location).attr('pathname') === '/farosa/public/admin/pedidos'){
+			if($(location).attr('pathname') === '/admin/pedidos'){
 				$('a.add-pedido').removeClass('hide');
 			}
 			
-			if($(location).attr('pathname') === '/farosa/public/admin/clientes' || $(location).attr('pathname') === '/farosa/public/admin/productos' || $(location).attr('pathname') === '/farosa/public/admin/pedidos'){
+			if($(location).attr('pathname') === '/admin/clientes' || $(location).attr('pathname') === '/admin/productos' || $(location).attr('pathname') === '/admin/pedidos'){
 				$('a.return').css('display','block');
 				$('a.return span i.fa').addClass('fa-home');
-				$('a.return').attr('href',"/farosa/public/admin/dashboard");
-			}else if($(location).attr('pathname') === '/farosa/public/admin/user' || $(location).attr('pathname') === '/farosa/public/admin/role'){
+				$('a.return').attr('href',"/admin/dashboard");
+			}else if($(location).attr('pathname') === '/admin/user' || $(location).attr('pathname') === '/admin/role'){
 				$('a.return').css('display','block');
 				$('a.return span i.fa').addClass('fa-reply');
-				$('a.return').attr('href',"/farosa/public/admin/usuarios");
+				$('a.return').attr('href',"/admin/usuarios");
 			}else{
 				$('a.return').css('display','block');
 				$('a.return span i.fa').addClass('fa-home');
-				$('a.return').attr('href',"/farosa/public/admin/dashboard");
+				$('a.return').attr('href',"/admin/dashboard");
 			}
-			
-			// $('table#crudTable thead tr th').css('display','block');
 		</script>
 	@endpush
 @endsection

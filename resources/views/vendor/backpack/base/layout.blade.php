@@ -64,7 +64,7 @@
         <a href="" class="return">
 			<span style="color:white;font-size:2rem;" ><i class="fa"></i></span>
         </a>
-		<a href="/farosa/public/admin/pedidos/create" class="add-pedido hide">
+		<a href="/admin/pedidos/create" class="add-pedido hide">
 			<span style="color:white;font-size:2rem;" ><i class="fa fa-plus"></i></span>
         </a>
 		<a href="{{ url('') }}" class="logo">
