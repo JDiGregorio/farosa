@@ -24,9 +24,9 @@ class UserCrudController extends CrudController
                 'type'  => 'text',
             ],
             [
-                'name'  => 'email',
-                'label' => trans('backpack::permissionmanager.email'),
-                'type'  => 'email',
+                'name'  => 'username',
+                'label' => "Usuario",
+                'type'  => 'text',
             ],
         ]);
 
@@ -34,6 +34,14 @@ class UserCrudController extends CrudController
             [
                 'name'  => 'name',
                 'label' => trans('backpack::permissionmanager.name'),
+                'type'  => 'text',
+				'wrapperAttributes' => [
+					'class' => 'form-group col-md-12',
+				],				
+            ],
+			[
+                'name'  => 'username',
+                'label' => "Usuario",
                 'type'  => 'text',
 				'wrapperAttributes' => [
 					'class' => 'form-group col-md-12',
@@ -143,7 +151,7 @@ class UserCrudController extends CrudController
 			return redirect('/');
 		}
 		
-		return parent::edit();
+		return parent::edit($id);
 	}
 	
 	public function destroy($id)

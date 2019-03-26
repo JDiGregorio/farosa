@@ -12,7 +12,7 @@ class User extends Authenticatable
     use Notifiable;
 	use CrudTrait;
 
-    protected $fillable = ['name', 'email', 'password','digitar_precio','SalesRep_id','tipo_user'];
+    protected $fillable = ['name', 'email', 'password','digitar_precio','SalesRep_id','tipo_user','username'];
     protected $hidden = ['password', 'remember_token'];
     protected $casts = ['email_verified_at' => 'datetime'];
 	public $timestamps = false;
