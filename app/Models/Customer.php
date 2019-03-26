@@ -15,7 +15,6 @@ class Customer extends Model
     protected $fillable = ['ID','FirstName','AccountNumber','CustomText1','CustomText2','AccountBalance','CreditLimit','SalesRepID'];
     protected $visible = ['ID','FirstName'];
 	public $timestamps = false;
-	protected $guard_name = 'web';
 	
     /*------------------------------------------------------------------------
     | FUNCTIONS

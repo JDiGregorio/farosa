@@ -8,7 +8,7 @@
         <input
             type="text"
             name="{{ $field['name'] }}"
-            value=""
+            value="0.00"
             readonly
 			@include('crud::inc.field_attributes')
         >
