@@ -84,7 +84,12 @@ body {
 /* ----------- MEMÚ INICIO ----------- */
 
 .div-padding{
-	padding: 15px 15px;
+	padding: 5px;
+}
+
+.div-margin{
+	margin-right: 0px;
+    margin-left: 0px;
 }
 
 .div-item-menu{
@@ -122,6 +127,17 @@ body {
     padding: 8px 20px;
     border-radius: 5px;
     text-transform: uppercase;
+}
+
+.text-sm {
+    text-align: center;
+    background-color: #367fa9;
+    border-top: 0 solid transparent;
+}
+
+.text-sm a{
+    font-size: 1.5rem;
+	color: #FFF;
 }
 
 /* ----------- FORM PREVIEW ----------- */
