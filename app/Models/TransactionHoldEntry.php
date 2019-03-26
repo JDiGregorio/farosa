@@ -25,7 +25,6 @@ class TransactionHoldEntry extends Model
 						   'Comment','DetailID','SalesRepID','SerialNumber1','SerialNumber2','SerialNumber3','VoucherNumber',
 						   'VoucherExpirationDate','DBTimeStamp','DiscountReasonCodeID','ReturnReasonCodeID','TaxChangeReasonCodeID',
 						   'ItemTaxID','ComponentQuantityReserved','TransactionTime','IsAddMoney','VoucherID'];
-	protected $guard_name = 'web';
 	
     /*------------------------------------------------------------------------
     | FUNCTIONS
