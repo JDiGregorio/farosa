@@ -116,7 +116,13 @@
 	@push('scripts')
 		<script>
 			if($(location).attr('pathname') === '/admin/pedidos'){
-				$('a.add-pedido').removeClass('hide');
+				$('a.add-pedido').css('display','block');
+				$('a.add-pedido span i.fa').addClass('fa-plus');
+				$('a.add-pedido').attr('href',"/admin/pedidos/create");
+			}else if($(location).attr('pathname') === '/admin/user'){
+				$('a.add-pedido').css('display','block');
+				$('a.add-pedido span i.fa').addClass('fa-plus');
+				$('a.add-pedido').attr('href',"/admin/user/create");
 			}
 			
 			if($(location).attr('pathname') === '/admin/clientes' || $(location).attr('pathname') === '/admin/productos' || $(location).attr('pathname') === '/admin/pedidos' || $(location).attr('pathname') === '/admin/user'){

@@ -59,31 +59,18 @@
     <!-- Site wrapper -->
     <div class="wrapper">
 
-      <header class="main-header">
-        <!-- Logo -->
-        <a href="" class="return">
-			<span style="color:white;font-size:2rem;" ><i class="fa"></i></span>
-        </a>
-		<a href="/admin/pedidos/create" class="add-pedido hide">
-			<span style="color:white;font-size:2rem;" ><i class="fa fa-plus"></i></span>
-        </a>
-		<a href="{{ url('') }}" class="logo">
-			<span class="logo-lg">{!! config('backpack.base.logo_lg') !!}</span>
-        </a>
-		
-        <!-- Header Navbar: style can be found in header.less -->
-        {{--<nav class="navbar navbar-static-top" role="navigation">
-          <!-- Sidebar toggle button-->
-          <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-            <span class="sr-only">{{ trans('backpack::base.toggle_navigation') }}</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-		  
-          @include('backpack::inc.menu')
-        </nav>--}}
-      </header>
+		<header class="main-header">
+			<!-- Logo, button return and create -->
+			<a href="" class="return">
+				<span><i class="fa"></i></span>
+			</a>
+			<a href="" class="add-pedido">
+				<span><i class="fa"></i></span>
+			</a>
+			<a href="" class="logo">
+				<span class="logo-lg">{!! config('backpack.base.logo_lg') !!}</span>
+			</a>
+		</header>
 
       <!-- =============================================== -->
 

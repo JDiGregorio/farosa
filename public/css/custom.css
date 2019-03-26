@@ -56,14 +56,25 @@ body {
 	position: absolute;
 }
 
+.return span{
+	color: white;
+	font-size: 2rem;
+}
+
 .add-pedido{
+	display: none;
 	cursor: pointer;
 	height: 40px;
-	margin: 0px 5px 5px 88.5%;
+	margin: 0px 5px 5px 89%;
 	width: 40px;
 	float: right; 
 	padding: 10px;
 	position: absolute;
+}
+
+.add-pedido span{
+	color: white;
+	font-size: 2rem;
 }
 
 .logo{
@@ -72,18 +83,8 @@ body {
 
 /* ----------- MEMÚ INICIO ----------- */
 
-.div-left{
-	padding-right: 10px;
-    padding-left: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-.div-right{
-	padding-right: 20px;
-    padding-left: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+.div-padding{
+	padding: 15px 15px;
 }
 
 .div-item-menu{
@@ -619,7 +620,7 @@ ul.actions li:last-child {
 .decrement-btn{
 	height: 40px;
     width: 40px;
-    background-color: #000099;
+    background-color: #4c4c4c;
     -webkit-appearance: button-bevel;
     border-radius: 5px;
     font-size: 18px;
@@ -630,7 +631,7 @@ ul.actions li:last-child {
 .increment-btn{
 	height: 40px;
     width: 40px;
-    background-color: #cc0000;
+    background-color: #4c4c4c;
     -webkit-appearance: button-bevel;
     border-radius: 5px;
     font-size: 18px;

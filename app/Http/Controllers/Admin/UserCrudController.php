@@ -7,28 +7,16 @@ use Backpack\PermissionManager\app\Http\Requests\UserStoreCrudRequest as StoreRe
 use Backpack\PermissionManager\app\Http\Requests\UserUpdateCrudRequest as UpdateRequest;
 use Illuminate\Http\Request;
 
-use Spatie\Permission\PermissionRegistrar;
-use App\Authorizable;
-use App\User;
-use Auth;
-
 class UserCrudController extends CrudController
-{
-	//use Authorizable;
-	
+{	
     public function setup()
     {
-        /*
-        |--------------------------------------------------------------------------
-        | BASIC CRUD INFORMATION
-        |--------------------------------------------------------------------------
-        */
         $this->crud->setModel(config('backpack.permissionmanager.models.user'));
         $this->crud->setEntityNameStrings(trans('backpack::permissionmanager.user'), trans('backpack::permissionmanager.users'));
-         $this->crud->setRoute(config('backpack.base.route_prefix').'/user');
-		$this->crud->enableAjaxTable();
+        $this->crud->setRoute(config('backpack.base.route_prefix').'/user');
 		
-        // Columns.
+		$this->crud->removeButton('create');
+		
         $this->crud->setColumns([
             [
                 'name'  => 'name',
@@ -40,25 +28,8 @@ class UserCrudController extends CrudController
                 'label' => trans('backpack::permissionmanager.email'),
                 'type'  => 'email',
             ],
-            [ // n-n relationship (with pivot table)
-               'label'     => trans('backpack::permissionmanager.roles'), // Table column heading
-               'type'      => 'select_multiple',
-               'name'      => 'roles', // the method that defines the relationship in your Model
-               'entity'    => 'roles', // the method that defines the relationship in your Model
-               'attribute' => 'name', // foreign key attribute that is shown to user
-               'model'     => config('permission.models.role'), // foreign key model
-            ],
-            [ // n-n relationship (with pivot table)
-               'label'     => trans('backpack::permissionmanager.extra_permissions'), // Table column heading
-               'type'      => 'select_multiple',
-               'name'      => 'permissions', // the method that defines the relationship in your Model
-               'entity'    => 'permissions', // the method that defines the relationship in your Model
-               'attribute' => 'name', // foreign key attribute that is shown to user
-               'model'     => config('permission.models.permission'), // foreign key model
-            ],
         ]);
 
-        // Fields
         $this->crud->addFields([
             [
                 'name'  => 'name',
@@ -66,8 +37,7 @@ class UserCrudController extends CrudController
                 'type'  => 'text',
 				'wrapperAttributes' => [
 					'class' => 'form-group col-md-12',
-				],
-				// 'tab' => 'Datos generales',
+				],				
             ],
             [
                 'name'  => 'email',
@@ -76,7 +46,6 @@ class UserCrudController extends CrudController
 				'wrapperAttributes' => [
 					'class' => 'form-group col-md-12',
 				],
-				// 'tab' => 'Datos generales',
             ],
             [
                 'name'  => 'password',
@@ -85,7 +54,6 @@ class UserCrudController extends CrudController
 				'wrapperAttributes' => [
 					'class' => 'form-group col-md-12',
 				],
-				// 'tab' => 'Datos generales',
             ],
             [
                 'name'  => 'password_confirmation',
@@ -94,7 +62,6 @@ class UserCrudController extends CrudController
 				'wrapperAttributes' => [
 					'class' => 'form-group col-md-12',
 				],
-				// 'tab' => 'Datos generales',
             ],
 			[
                 'label' => "Vendedor",
@@ -106,73 +73,107 @@ class UserCrudController extends CrudController
 				'wrapperAttributes' => [
 					'class' => 'form-group col-md-12',
 				],
-				// 'tab' => 'Datos generales',
 			],
 			[
 				'name' => 'digitar_precio',
 				'label' => 'Digitar precio',
 				'type' => 'radio',
 				'options' => ["0" => "No puede digitar","1" => "Puede digitar"],
-				// 'inline'      => false,
+				'inline'      => true,
 				'wrapperAttributes' => [
-					'class' => 'form-group col-md-12',
+					'class' => 'form-group col-md-6',
 				],
-				// 'tab' => 'Datos generales',
 			],
-            // [
-				// 'label'             => trans('backpack::permissionmanager.user_role_permission'),
-				// 'field_unique_name' => 'user_role_permission',
-				// 'type'              => 'checklist_dependency_secondary_rows',
-				// 'name'              => 'roles_and_permissions',
-				// 'subfields'         => [
-                    // 'primary' => [
-                        // 'label'            => trans('backpack::permissionmanager.roles'),
-                        // 'name'             => 'roles', 
-                        // 'entity'           => 'roles', 
-                        // 'entity_secondary' => 'permissions', 
-                        // 'attribute'        => 'name', 
-                        // 'model'            => config('permission.models.role'), 
-                        // 'pivot'            => true, 
-                        // 'number_columns'   => 3,
-                    // ],
-                    // 'secondary' => [
-                        // 'label'          => ucfirst(trans('backpack::permissionmanager.permission_singular')),
-                        // 'name'           => 'permissions',
-                        // 'entity'         => 'permissions',
-                        // 'entity_primary' => 'roles',
-                        // 'attribute'      => 'name',
-                        // 'model'          => config('permission.models.permission'),
-                        // 'pivot'          => true,
-                        // 'number_columns' => 3,
-                    // ],
-                // ],
-				// 'wrapperAttributes' => [
-					// 'class' => 'form-group col-md-12',
-				// ],
-            // ],
         ]);
+		
+		$this->crud->addField([
+			'name' => 'tipo_user',
+			'label' => 'Administrador',
+			'type' => 'radio',
+			'options' => ["0" => "No","1" => "Si"],
+			'inline'      => true,
+			'wrapperAttributes' => [
+				'class' => 'form-group col-md-6',
+			],
+		],'update');	
     }
+
+	public function index()
+	{
+		$usuario = Backpack_auth()->user()->tipo_user;
+		
+		if($usuario != 1)
+		{
+			return redirect('/');
+		}
+		
+		return parent::index();
+	}
+	
+	public function search()
+	{
+		$usuario = Backpack_auth()->user()->tipo_user;
+		
+		if($usuario != 1)
+		{
+			return redirect('/');
+		}
+		
+		return parent::search();
+	}
+	
+	public function create()
+	{
+		$usuario = Backpack_auth()->user()->tipo_user;
+		
+		if($usuario != 1)
+		{
+			return redirect('/');
+		}
+		
+		return parent::create();
+	}
+	
+	public function edit($id)
+	{
+		$usuario = Backpack_auth()->user()->tipo_user;
+		
+		if($usuario != 1)
+		{
+			return redirect('/');
+		}
+		
+		return parent::edit();
+	}
+	
+	public function destroy($id)
+	{
+		$usuario = Backpack_auth()->user()->tipo_user;
+		
+		if($usuario != 1)
+		{
+			return redirect('/');
+		}
+		
+		return parent::destroy();
+	}
 
     public function store(StoreRequest $request)
     {
         $this->handlePasswordInput($request);
-
         return parent::storeCrud($request);
     }
 
     public function update(UpdateRequest $request)
     {
         $this->handlePasswordInput($request);
-
         return parent::updateCrud($request);
     }
 
     protected function handlePasswordInput(Request $request)
     {
-        // Remove fields not present on the user.
         $request->request->remove('password_confirmation');
 
-        // Encrypt password if specified.
         if ($request->input('password')) {
             $request->request->set('password', bcrypt($request->input('password')));
         } else {

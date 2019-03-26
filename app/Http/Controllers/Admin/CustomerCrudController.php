@@ -72,10 +72,6 @@ class CustomerCrudController extends CrudController
 			"disponible"=>$disponible,
 		);
 		
-		return View::make('views.preview_customer')->with($data);
-	}
-	
-	public function menu_usuarios(){
-		return view('menu_usuarios');
+		return View::make('form_views.preview_customer')->with($data);
 	}
 }

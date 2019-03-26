@@ -55,12 +55,13 @@ class ItemCrudController extends CrudController
 			"item"=>$item,
 		);
 		
-		return View::make('views.preview_item')->with($data);
+		return View::make('form_views.preview_item')->with($data);
 	}
 	
-	public function get_items(){
+	public function get_items()
+	{
         $productos = Item::all();
-
+		
         return $productos;
     }
 }

@@ -121,19 +121,6 @@
 				remover_linea(id){
 					var indice = this.getObjectIndex(this.linea_pedido, "ID",id);
 					this.linea_pedido.splice(indice, 1);
-					
-					// var table = $('#products-new').DataTable();
-					// var total = 0;
-					
-					// $('input[name="total_pedido"]').val("");
-					// table.rows().remove().draw();
-					
-					// $(this.linea_pedido).each(function(key,val){
-						// table.row.add([val.ID,val.Description,val.QuantityPurchased,val.Price,'']).draw();
-						// total = total + val.QuantityPurchased * val.Price;
-					// });
-					
-					// $('input[name="total_pedido"]').val(this.Moneda(total));
 				}
 				
 				dibujar_filas(){
