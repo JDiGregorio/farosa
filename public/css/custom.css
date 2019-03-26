@@ -133,15 +133,20 @@ body {
     text-transform: uppercase;
 }
 
-.text-sm {
+.main-footer {
+    padding: 6px;
     text-align: center;
-    background-color: #367fa9;
-    border-top: 0 solid transparent;
+    background-color: #FFF;
+	border-top: 1px solid #fff;
+    border-bottom: 0 solid transparent;
+    height: 30px;
 }
 
-.text-sm a{
-    font-size: 1.5rem;
-	color: #FFF;
+.main-footer a{
+    font-size: 1.1rem;
+    color: #4c4c4c;
+    font-weight: 600;
+    text-transform: uppercase;
 }
 
 /* ----------- FORM PREVIEW ----------- */
