@@ -112,7 +112,7 @@ class TransactionHold extends Model
 		
 		self::deleting(function($model)
 		{
-            //$model->transactionholdentries()->delete();
+            $model->transactionholdentries()->delete();
         });
     }
 	

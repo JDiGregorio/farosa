@@ -3,9 +3,9 @@
 	
 	<div class="switch-field">
 		<input type="radio" data-pago="credito" class="control-input-pago" id="credito" name="group">
-		<label id="label-0" class="custom-control-label" for="credito">Credito</label>
-		<input type="radio" data-pago="contado" class="control-input-pago" id="contado" name="group">
-		<label id="label-1" class="custom-control-label" for="contado">Contado</label>
+		<label id="label-credito" class="custom-control-label" for="credito">Credito</label>
+		<input type="radio" data-pago="contado" class="control-input-pago" id="contado" name="group" checked>
+		<label id="label-contado" class="custom-control-label" for="contado">Contado</label>
 	</div>
 		
 	{{-- HINT --}}

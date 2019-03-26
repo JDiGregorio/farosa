@@ -196,13 +196,22 @@
 					$("#response").text(dato);
 					
 					$(".hold-comment-input").remove();
-					var comment = $("<input>").attr("type", "hidden").attr("name","HoldComment").val(cliente.custom_text_2 + "/" + cliente.first_name + "/" + "CONTADO").addClass("hold-comment-input");
+					
+					var comment_string = cliente.custom_text_2 + "/" + cliente.first_name + "/" + pedido.forma_pago;
+					var comment = $("<input>").attr("type", "hidden").attr("name","HoldComment").val(comment_string.toUpperCase()).addClass("hold-comment-input");
 					$('form').append($(comment));
 				});
 			}
 
-			$(".control-input-pago").change(function () {				
+			$(".control-input-pago").change(function () {
 				var radio_seleccion = $(this).data('pago');
+				var forma_pago = $("input.control-input-pago:checked").data('pago');
+				pedido.forma_pago = forma_pago;
+				
+				$(".hold-comment-input").remove();
+				var comment_string = cliente.custom_text_2 + "/" + cliente.first_name + "/" + forma_pago;
+				var comment = $("<input>").attr("type", "hidden").attr("name","HoldComment").val(comment_string.toUpperCase()).addClass("hold-comment-input");
+				$('form').append($(comment));
 				
 				if(radio_seleccion === 'credito'){
 					$('div.oculto').css('display','block');
@@ -216,15 +225,13 @@
 ====================================================================*/
 			
 			$(document).ready(function(){
-<<<<<<< HEAD
-				
+
 				var salesRepID = $("<input>").attr("type", "hidden").attr("name","SalesRepID").val({{ Backpack_auth()->user()->id }});
 				$('form').append($(salesRepID));
+				
+				pedido.forma_pago = $("input.control-input-pago:checked").data('pago');
 					
-				  var table = $('#products-new').DataTable({
-=======
 				  var table = $('#products-new').removeAttr('width').DataTable({
->>>>>>> 01fc0d45b6e5ec38fc57233cafd42799a08785bc
 					scrollX:  true,
 					scrollCollapse: true,
 					paging:   false,
