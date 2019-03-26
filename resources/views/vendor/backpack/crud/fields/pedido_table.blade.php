@@ -225,20 +225,22 @@
 ====================================================================*/
 			
 			$(document).ready(function(){
-
+				
 				var salesRepID = $("<input>").attr("type", "hidden").attr("name","SalesRepID").val({{ Backpack_auth()->user()->id }});
 				$('form').append($(salesRepID));
 				
 				pedido.forma_pago = $("input.control-input-pago:checked").data('pago');
 					
-				  var table = $('#products-new').removeAttr('width').DataTable({
+				var table = $('#products-new').removeAttr('width').DataTable({
 					scrollX:  true,
 					scrollCollapse: true,
 					paging:   false,
 					ordering: false,
 					info:     false,
 					searching: false,
-					columnDefs: [ {
+					responsive: true,
+					fixedHeader: true,
+					columnDefs: [{
 						targets: -1,
 						data: null,
 						defaultContent: '<button id="btn-remFila" class="btn-eliminar fa fa-trash" type="button"></button>',
@@ -249,19 +251,25 @@
 						searchable: false,
 					},
 					{ 
+						width: "50%",
+						targets: [1], 
+						className: "text-center",
+					},
+					{ 
+						width: "10%",
 						targets: [2], 
 						className: "text-center",
 					},
 					{ 
-						width: 80,
+						width: "30%",
 						targets: [3],
 						className: "precio-column text-center",						
 					},
 					{ 
+						width: "10%",
 						targets: [4],
 						className: "text-center",
 					}],
-					fixedColumns: true,
 					columns: [
 						{ title: "ID" },
 						{ title: "Descripción" },
@@ -526,9 +534,6 @@
 						$('#label-3').html('Precio C - '+ parseFloat(seleccionado.PriceC).toFixed(2));	
 					}
 				});
-				
-				
-				
 			});	
 		</script>
     @endpush

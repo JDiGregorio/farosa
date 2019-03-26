@@ -92,7 +92,7 @@
 		
 		<!-- Footer -->
 		<footer class="main-footer text-sm clearfix">
-			<a href=""><i class=""></i>Fermin Arellano</a>
+			<a href=""><i class=""></i>Hecho por: TechnoLabs</a>
 		</footer><!-- /.footer -->
     </div><!-- ./wrapper -->
 
