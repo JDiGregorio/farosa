@@ -33,6 +33,11 @@ class ItemCrudController extends CrudController
 			'name' => 'Description',
 			'label' => 'Descripción',
 		]);
+		
+		$this->crud->addColumn([
+			'name' => 'Quantity',
+			'label' => 'Stock',
+		]);
     }
 
     public function store(StoreRequest $request)

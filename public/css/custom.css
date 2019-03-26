@@ -49,7 +49,7 @@ body {
 	display: none;
 	cursor: pointer;
 	height: 40px;
-	margin: 0px 5px 5px 5px;
+	margin: 0px 5px 5px 10px;
 	width: 40px;
 	float: left;
 	padding: 10px;
@@ -65,7 +65,7 @@ body {
 	display: none;
 	cursor: pointer;
 	height: 40px;
-	margin: 0px 5px 5px 89%;
+	margin: 0px 5px 5px 86%;
 	width: 40px;
 	float: right; 
 	padding: 10px;
@@ -81,10 +81,19 @@ body {
 	pointer-events: none;
 }
 
+.oculto{
+	display: none;
+}
+
 /* ----------- MEMÚ INICIO ----------- */
 
 .div-padding{
-	padding: 15px 15px;
+	padding: 5px;
+}
+
+.div-margin{
+	margin-right: 0px;
+    margin-left: 0px;
 }
 
 .div-item-menu{
@@ -122,6 +131,17 @@ body {
     padding: 8px 20px;
     border-radius: 5px;
     text-transform: uppercase;
+}
+
+.text-sm {
+    text-align: center;
+    background-color: #367fa9;
+    border-top: 0 solid transparent;
+}
+
+.text-sm a{
+    font-size: 1.5rem;
+	color: #FFF;
 }
 
 /* ----------- FORM PREVIEW ----------- */

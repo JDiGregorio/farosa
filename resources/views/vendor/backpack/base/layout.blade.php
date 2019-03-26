@@ -72,31 +72,29 @@
 			</a>
 		</header>
 
-      <!-- =============================================== -->
-
-      @include('backpack::inc.sidebar')
-
-      <!-- =============================================== -->
+		<!-- =============================================== -->
+			@include('backpack::inc.sidebar')
+		<!-- =============================================== -->
 	
-      <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
   
 		
-		<!-- Content Header (Page header) -->
-		 @yield('header')
+			<!-- Content Header (Page header) -->
+			@yield('header')
 
-        <!-- Main content -->
-        <section class="content">
-
-          @yield('content')
-
-        </section>
-        <!-- /.content -->
-      </div>
-      <!-- /.content-wrapper -->
-    </div>
-    <!-- ./wrapper -->
-
+			<!-- Main content -->
+			<section class="content">
+				@yield('content')
+			</section>
+			<!-- /.content -->
+		</div><!-- /.content-wrapper -->
+		
+		<!-- Footer -->
+		<footer class="main-footer text-sm clearfix">
+			<a href=""><i class=""></i>Fermin Arellano</a>
+		</footer><!-- /.footer -->
+    </div><!-- ./wrapper -->
 
     @yield('before_scripts')
     @stack('before_scripts')
@@ -117,12 +115,12 @@
     <script type="text/javascript">
         /* Store sidebar state */
         $('.sidebar-toggle').click(function(event) {
-          event.preventDefault();
-          if (Boolean(sessionStorage.getItem('sidebar-toggle-collapsed'))) {
-            sessionStorage.setItem('sidebar-toggle-collapsed', '');
-          } else {
-            sessionStorage.setItem('sidebar-toggle-collapsed', '1');
-          }
+			event.preventDefault();
+			if (Boolean(sessionStorage.getItem('sidebar-toggle-collapsed'))) {
+				sessionStorage.setItem('sidebar-toggle-collapsed', '');
+			} else {
+				sessionStorage.setItem('sidebar-toggle-collapsed', '1');
+			}
         });
         // To make Pace works on Ajax calls
         $(document).ajaxStart(function() { Pace.restart(); });

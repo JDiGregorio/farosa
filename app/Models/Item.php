@@ -12,11 +12,9 @@ class Item extends Model
 
     protected $table = 'Item';
     protected $primaryKey = 'ID';
-    protected $fillable = ['ID','Description','ItemLookupCode','Price','PriceA','PriceB','PriceC'];
-    protected $visible = ['ID','Description','ItemLookupCode','Price','PriceA','PriceB','PriceC'];
-	protected $guard_name = 'web';
-	
-	 public $timestamps = false;
+    protected $fillable = ['ID','Description','ItemLookupCode','Price','PriceA','PriceB','PriceC','Quantity'];
+    protected $visible = ['ID','Description','ItemLookupCode','Price','PriceA','PriceB','PriceC','Quantity'];
+	public $timestamps = false;
 
     /*------------------------------------------------------------------------
     | FUNCTIONS

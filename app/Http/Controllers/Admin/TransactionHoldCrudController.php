@@ -46,11 +46,20 @@ class TransactionHoldCrudController extends CrudController
 		]);
 		
 		$this->crud->addField([
+			'name' => 'toggle_pago',
+			'label' => 'Forma de pago',
+			'type' => 'toggle_pago',
+			'wrapperAttributes' => [
+				'class' => 'form-group col-md-12',
+			],
+		]);
+		
+		$this->crud->addField([
 			'name' => 'credito_disponible',
 			'label' => '',
 			'type' => 'credito_disponible',
 			'wrapperAttributes' => [
-				'class' => 'form-group col-md-12',
+				'class' => 'form-group col-md-12 oculto',
 			],
 		]);
 		

@@ -21,7 +21,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="js-title-step">Hola</h4>
+					<h4 class="js-title-step"></h4>
 				</div>
 				<div class="modal-body">
 					<div class="row" data-step="1" data-title="Selección de producto.">
@@ -113,6 +113,7 @@
 			class Pedido{
 				
 				linea_pedido = [];
+				forma_pago = "";
 				
 				agregar_linea = function(object){
 					this.linea_pedido.push(object);
@@ -135,7 +136,7 @@
 					$('input[name="total_pedido"]').val("");
 					
 					$(this.linea_pedido).each(function(key,val){
-						table.row.add([val.ID,val.Description,val.QuantityPurchased,val.Price,'']).draw();
+						table.row.add([val.ID,val.Description,val.QuantityPurchased,'L. '+val.Price,'']).draw();
 						total = total + val.QuantityPurchased * val.Price;
 					});
 					
@@ -180,7 +181,7 @@
 					return -1;
 				};
 			}
-			
+
 			var pedido = new Pedido(); 
 			
 			$('select[name=CustomerID]').change(function () {
@@ -199,17 +200,31 @@
 					$('form').append($(comment));
 				});
 			}
+
+			$(".control-input-pago").change(function () {				
+				var radio_seleccion = $(this).data('pago');
+				
+				if(radio_seleccion === 'credito'){
+					$('div.oculto').css('display','block');
+				}else{
+					$('div.oculto').css('display','none');
+				}
+			});
 						
 /*====================================================================
    ------------------------- Tabla Pedido -------------------------   
 ====================================================================*/
 			
 			$(document).ready(function(){
+<<<<<<< HEAD
 				
 				var salesRepID = $("<input>").attr("type", "hidden").attr("name","SalesRepID").val({{ Backpack_auth()->user()->id }});
 				$('form').append($(salesRepID));
 					
 				  var table = $('#products-new').DataTable({
+=======
+				  var table = $('#products-new').removeAttr('width').DataTable({
+>>>>>>> 01fc0d45b6e5ec38fc57233cafd42799a08785bc
 					scrollX:  true,
 					scrollCollapse: true,
 					paging:   false,
@@ -219,7 +234,7 @@
 					columnDefs: [ {
 						targets: -1,
 						data: null,
-						defaultContent: '<button id="btn-remFila" class="btn-eliminar fa fa-times" type="button"></button>',
+						defaultContent: '<button id="btn-remFila" class="btn-eliminar fa fa-trash" type="button"></button>',
 					},
 					{
 						targets: [0],
@@ -227,9 +242,19 @@
 						searchable: false,
 					},
 					{ 
-						className: "precio-column",
-						targets: [3], 
+						targets: [2], 
+						className: "text-center",
+					},
+					{ 
+						width: 80,
+						targets: [3],
+						className: "precio-column text-center",						
+					},
+					{ 
+						targets: [4],
+						className: "text-center",
 					}],
+					fixedColumns: true,
 					columns: [
 						{ title: "ID" },
 						{ title: "Descripción" },

@@ -17,7 +17,6 @@ class SaleRep extends Model
     protected $fillable = ['ID','Name'];
     // protected $hidden = [];
     // protected $dates = [];
-	protected $guard_name = 'web';
 
     /*------------------------------------------------------------------------
     | FUNCTIONS

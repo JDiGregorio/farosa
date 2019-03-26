@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
-use Illuminate\Support\Facades\Auth;
 
 class TransactionHold extends Model
 {
@@ -24,7 +23,6 @@ class TransactionHold extends Model
 						   'DefaultReturnReasonCodeID','DefaultTaxChangeReasonCodeID','BatchNumber'];
     protected $hidden = ['DBTimeStamp'];
     // protected $dates = [];
-	protected $guard_name = 'web';
 
     /*------------------------------------------------------------------------
     | FUNCTIONS
