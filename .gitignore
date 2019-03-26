@@ -15,3 +15,4 @@ storage/*.key
 .env
 Homestead.yaml
 Homestead.json
+yarn.lock

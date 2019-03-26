@@ -385,7 +385,7 @@
 				}
 			});		
 			
-			$.getJSON( "/admin/productos/todos", function(productos){
+			$.getJSON( "/admin/producto/todos", function(productos){
 				productos_json = productos;
 				var rows_selected = [];
 				

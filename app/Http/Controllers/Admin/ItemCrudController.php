@@ -47,7 +47,7 @@ class ItemCrudController extends CrudController
         return $redirect_location;
     }
 	
-	public function get_item($id)
+	public function show($id)
 	{
 		$item =  Item::where([['id','=',$id]])->get();
 		
@@ -60,8 +60,8 @@ class ItemCrudController extends CrudController
 	
 	public function get_items()
 	{
-        $productos = Item::all();
+		$productos = Item::all();
 		
-        return $productos;
-    }
+		return $productos;
+	}
 }
