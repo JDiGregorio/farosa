@@ -59,7 +59,7 @@ class CustomerCrudController extends CrudController
 		$limite = $customer->first()->CreditLimit;
 		$cuenta = $customer->first()->AccountBalance;
 		$disponible = $limite - $cuenta;
-		return json_decode('[{"disponible":' . $disponible . ' }]');
+		return json_decode('[{"disponible":' . $disponible . ', "custom_text_2":"' . $customer->first()->CustomText2 . '", "first_name": "' . $customer->first()->FirstName . '" }]');
 	}
 	
 	public function show($id)

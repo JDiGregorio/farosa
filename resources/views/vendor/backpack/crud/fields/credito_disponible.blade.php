@@ -83,20 +83,5 @@
   {{-- FIELD EXTRA JS --}}
   {{-- push things in the after_scripts section --}}
 
-		@push('crud_fields_scripts')
-			<script>
-				$('select[name=CustomerID]').change(function () {
-					var id = $( this ).val();
-					GetId(id);
-					console.log('prueba');
-				});
-				
-				function GetId(id) {
-					$.getJSON( "/admin/cliente/saldo/"+id, function(data) {
-						var dato = parseFloat(data[0].disponible).toFixed(2);
-						$("#response").text(dato);
-					});
-				}
-			</script>
-		@endpush
+
 @endif

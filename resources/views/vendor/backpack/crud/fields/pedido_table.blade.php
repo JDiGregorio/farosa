@@ -103,27 +103,32 @@
 		<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 		<script src="https://cdn.datatables.net/select/1.3.0/js/dataTables.select.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
-		<script src="{{ asset('js/modal-steps.min.js') }}"></script>
+
 		<script>
 			var productos_data = [];
 			var productos_json = {};
 			var linea_pedido_tmp = {};
+			var cliente = {};
 						
 			class Pedido{
 				
 				linea_pedido = [];
 				
-				agregar_linea(object){
+				agregar_linea = function(object){
 					this.linea_pedido.push(object);
 					this.dibujar_filas();
-				}
+					
+					this.order_changed();
+				};
 				
-				remover_linea(id){
+				remover_linea = function(id){
 					var indice = this.getObjectIndex(this.linea_pedido, "ID",id);
 					this.linea_pedido.splice(indice, 1);
-				}
+					
+					this.order_changed();
+				};
 				
-				dibujar_filas(){
+				dibujar_filas = function(){
 					var table = $('#products-new').DataTable();
 					var total = 0;
 					table.rows().remove().draw();
@@ -135,30 +140,76 @@
 					});
 					
 					$('input[name="total_pedido"]').val(this.Moneda(total));
+				};
+				
+				order_changed = function(){
+					console.log("Order changed.");
+					this.set_orderlines();
+				};
+				
+				set_orderlines = function(){
+					this.remove_orderlines();
+					
+					$.each(this.linea_pedido, function(index, linea){
+						var id = $("<input>").attr("type", "hidden").attr("name","productos["+index+"][item_id]").val(linea.ID).addClass("attached-orderlines");
+						var description = $("<input>").attr("type", "hidden").attr("name","productos["+index+"][item_description]").val(linea.Description).addClass("attached-orderlines");
+						var qty = $("<input>").attr("type", "hidden").attr("name","productos["+index+"][item_qty]").val(linea.QuantityPurchased).addClass("attached-orderlines");
+						var price = $("<input>").attr("type", "hidden").attr("name","productos["+index+"][item_price]").val(linea.Price).addClass("attached-orderlines");
+						
+						$('form').append($(id));
+						$('form').append($(description));
+						$('form').append($(qty));
+						$('form').append($(price));
+					});
+				};
+				
+				remove_orderlines = function(){
+					$(".attached-orderlines").remove();
 				}
 				
-				Moneda(total) {
+				Moneda = function(total) {
 					return total.toFixed(2);
-				}
+				};
 				
-				getObjectIndex(arr, key, val){
+				getObjectIndex = function(arr, key, val){
 					for (var i = 0; i < arr.length; i++) {
 					  if (arr[i][key] == val){
 						return i;	  
 					  }	
 					}
 					return -1;
-				}
+				};
 			}
 			
 			var pedido = new Pedido(); 
+			
+			$('select[name=CustomerID]').change(function () {
+				var id = $( this ).val();
+				GetId(id);
+			});
+			
+			function GetId(id) {
+				$.getJSON( "/admin/cliente/saldo/"+id, function(data) {
+					cliente = data[0];
+					var dato = parseFloat(data[0].disponible).toFixed(2);
+					$("#response").text(dato);
+					
+					$(".hold-comment-input").remove();
+					var comment = $("<input>").attr("type", "hidden").attr("name","HoldComment").val(cliente.custom_text_2 + "/" + cliente.first_name + "/" + "CONTADO").addClass("hold-comment-input");
+					$('form').append($(comment));
+				});
+			}
 						
 /*====================================================================
    ------------------------- Tabla Pedido -------------------------   
 ====================================================================*/
 			
 			$(document).ready(function(){
-				  var table = $('#products-new').DataTable( {
+				
+				var salesRepID = $("<input>").attr("type", "hidden").attr("name","SalesRepID").val({{ Backpack_auth()->user()->id }});
+				$('form').append($(salesRepID));
+					
+				  var table = $('#products-new').DataTable({
 					scrollX:  true,
 					scrollCollapse: true,
 					paging:   false,
@@ -443,6 +494,9 @@
 						$('#label-3').html('Precio C - '+ parseFloat(seleccionado.PriceC).toFixed(2));	
 					}
 				});
+				
+				
+				
 			});	
 		</script>
     @endpush

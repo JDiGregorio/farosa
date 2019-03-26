@@ -14,11 +14,11 @@ use App\Models\TransactionHoldEntry;
 
 class TransactionHoldCrudController extends CrudController
 {
-    public function setup()
-    {
-        $this->crud->setModel('App\Models\TransactionHold');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/pedidos');
-        $this->crud->setEntityNameStrings('pedido', 'pedidos');
+	public function setup()
+	{
+		$this->crud->setModel('App\Models\TransactionHold');
+		$this->crud->setRoute(config('backpack.base.route_prefix') . '/pedidos');
+		$this->crud->setEntityNameStrings('pedido', 'pedidos');
 		
 		$this->crud->removeButton('create');
 		$this->crud->denyAccess(['revisions']);
@@ -111,33 +111,34 @@ class TransactionHoldCrudController extends CrudController
 				// 'class' => 'form-group col-md-12',
 			// ],
 		// ]);	
-    }
+	}
 
-    public function store(StoreRequest $request)
-    {
-        $redirect_location = parent::storeCrud($request);
-		// $this->insertReferencias($this->crud->entry, $request->aval);
-        return $redirect_location;
-    }
+	public function store(StoreRequest $request)
+	{
+		$redirect_location = parent::storeCrud($request);
+		$this->insertProductos($this->crud->entry, $request->productos);
+		return $redirect_location;
+	}
 	
-	private function insertReferencias($transactionhold, $entries)
+	private function insertProductos($transactionhold, $entries)
 	{
 		foreach($entries as $data){
 			$transactionhold->transactionholdentries()->create([
-				'TransactionHoldID' => $data['TransactionHoldID'],
-				'Description' => $data['Description'],
-				'QuantityPurchased' => $data['QuantityPurchased'],
-				'Price' => $data['Price'],
-				'FullPrice' => $data['FullPrice'],
-				'Taxable' => $data['Taxable'],
-				'ItemID' => $data['ItemID'],
+				'TransactionHoldID' => $transactionhold->id,
+				'Description' => $data['item_description'],
+				'QuantityPurchased' => $data['item_qty'],
+				'Price' => $data['item_price'],
+				'FullPrice' => $data['item_price'],
+				'Taxable' => False,
+				'ItemID' => $data['item_id'],
+				'SalesRepID' => $transactionhold->SalesRepID
 			]);
 		}
 	}
 
-    public function update(UpdateRequest $request)
-    {
-        $redirect_location = parent::updateCrud($request);
-        return $redirect_location;
-    }
+	public function update(UpdateRequest $request)
+	{
+		$redirect_location = parent::updateCrud($request);
+		return $redirect_location;
+	}
 }

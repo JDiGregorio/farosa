@@ -72,9 +72,8 @@ class TransactionHold extends Model
 			$model->DefaultDiscountReasonCodeID = $default_cero;		
 			$model->DefaultReturnReasonCodeID = $default_cero;		
 			$model->DefaultTaxChangeReasonCodeID = $default_cero;		
-			$model->BatchNumber = $default_tres;		
+			$model->BatchNumber = $default_tres;	
         });
-		
 		
 		self::updating(function($model)
 		{
@@ -130,7 +129,7 @@ class TransactionHold extends Model
 	
 	public function transactionholdentries()
 	{
-		return $this->hasMany('App\Models\TransactionHoldEntry');
+		return $this->hasMany('App\Models\TransactionHoldEntry','TransactionHoldID');
 	}
 	
 	public function clientee()
