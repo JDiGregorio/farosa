@@ -62,7 +62,7 @@ class CustomerCrudController extends CrudController
 		return json_decode('[{"disponible":' . $disponible . ' }]');
 	}
 	
-	public function get_customer($id)
+	public function show($id)
 	{
 		$customer =  Customer::where([['id','=',$id]])->get();
 		$disponible = $this->disponible($customer->first()->CreditLimit,$customer->first()->AccountBalance);

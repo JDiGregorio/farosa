@@ -1,10 +1,7 @@
 <?php
 
-	Route::get('crear-permisos/','PermissionCrudController@crear_permisos');
-	Route::get('clientes/{id}','CustomerCrudController@get_customer');
 	Route::get('cliente/saldo/{id}','CustomerCrudController@get_saldo');
-	Route::get('productos/{id}','ItemCrudController@get_item');
-	Route::get('productos/todos','ItemCrudController@get_items');
+	Route::get('producto/todos','ItemCrudController@get_items');
 
 	CRUD::resource('clientes', 'CustomerCrudController');
 	CRUD::resource('productos', 'ItemCrudController');
