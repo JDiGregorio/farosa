@@ -225,21 +225,13 @@
 ====================================================================*/
 			
 			$(document).ready(function(){
-<<<<<<< HEAD
-	
-				var salesRepID = $("<input>").attr("type", "hidden").attr("name","SalesRepID").val({{ Backpack_auth()->user()->id }});
-				$('form').append($(salesRepID));
 				
-				var table = $('#products-new').removeAttr('width').DataTable({
-=======
-
 				var salesRepID = $("<input>").attr("type", "hidden").attr("name","SalesRepID").val({{ Backpack_auth()->user()->id }});
 				$('form').append($(salesRepID));
 				
 				pedido.forma_pago = $("input.control-input-pago:checked").data('pago');
 					
-				  var table = $('#products-new').removeAttr('width').DataTable({
->>>>>>> master
+				var table = $('#products-new').removeAttr('width').DataTable({
 					scrollX:  true,
 					scrollCollapse: true,
 					paging:   false,
@@ -542,9 +534,6 @@
 						$('#label-3').html('Precio C - '+ parseFloat(seleccionado.PriceC).toFixed(2));	
 					}
 				});
-				
-				
-				
 			});	
 		</script>
     @endpush
