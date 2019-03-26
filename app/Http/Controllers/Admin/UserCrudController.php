@@ -163,7 +163,7 @@ class UserCrudController extends CrudController
 			return redirect('/');
 		}
 		
-		return parent::destroy();
+		return parent::destroy($id);
 	}
 
     public function store(StoreRequest $request)
