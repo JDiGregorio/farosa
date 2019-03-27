@@ -131,6 +131,7 @@
 			var productos_json = {};
 			var linea_pedido_tmp = {};
 			var cliente = {!! $cliente !!};
+			var modal_datatable = false;
 						
 			class Pedido{
 				
@@ -303,7 +304,7 @@
 			
 			$(document).ready(function(){
 				
-				var salesRepID = $("<input>").attr("type", "hidden").attr("name","SalesRepID").val({{ Backpack_auth()->user()->id }});
+				var salesRepID = $("<input>").attr("type", "hidden").attr("name","SalesRepID").val({{ Backpack_auth()->user()->SalesRep_id }});
 				$('form').append($(salesRepID));
 				
 				pedido.forma_pago = $("input.control-input-pago:checked").data('pago');
@@ -388,6 +389,7 @@
 			$('div.contact-container ul.actions li a').mousedown(function (){
 				$('div.modal-header h4.js-title-step').html('Seleccione producto.');
 				$('div.modal-footer button.btn-success').css({'background-color':'#f4f4f4','border-color':'#ddd','color':'#000'});
+				modal_datatable.search("").draw();
 			});
 			
 			$(".modal-footer .btn-success").mousedown(function (){
@@ -449,6 +451,7 @@
 			});
 			
 			function nextPanel(panel_actual, step){
+				
 				if(step != 3)
 				{	
 					panel_actual.addClass('hide');
@@ -468,8 +471,8 @@
 				}
 			}
 			
-			function prevPanel(panel_actual, step)
-			{
+			function prevPanel(panel_actual, step){
+				
 				if(step != 1)
 				{
 					panel_actual.addClass('hide');
@@ -573,7 +576,7 @@
 					productos_data.push(producto);
 				});
 				
-				$('#products').DataTable({
+				modal_datatable = $('#products').DataTable({
 					scrollY:  "40vh",
 					scrollCollapse: true,
 					paging:   false,

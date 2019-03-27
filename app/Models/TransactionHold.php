@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Backpack\CRUD\CrudTrait;
 
 class TransactionHold extends Model
@@ -22,15 +23,33 @@ class TransactionHold extends Model
 						   'ExchangeID','ChannelType','DefaultDiscountReasonCodeID',
 						   'DefaultReturnReasonCodeID','DefaultTaxChangeReasonCodeID','BatchNumber'];
     protected $hidden = ['DBTimeStamp'];
-    // protected $dates = [];
+    protected static  $_campoFiltro;
+	protected static  $_valoresFiltro;
 
     /*------------------------------------------------------------------------
     | FUNCTIONS
     |------------------------------------------------------------------------*/
 	
+	public static function setCampoFiltro($campo)
+	{
+		static::$_campoFiltro = $campo;
+	}
+	
+	public static function setValoresFiltro($listaValores)
+	{
+		static::$_valoresFiltro = $listaValores;
+	}
+	
 	public static function boot()
     {
 		parent::boot();
+		
+		if(isset(static::$_valoresFiltro))
+		{
+			static::addGlobalScope('accessiblex' . static::$_campoFiltro, function (Builder $builder){
+				$builder->whereIn(static::$_campoFiltro, static::$_valoresFiltro);
+			});
+		}
 		
         self::creating(function($model)
 		{

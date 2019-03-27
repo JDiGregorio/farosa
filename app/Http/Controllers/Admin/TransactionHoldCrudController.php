@@ -12,10 +12,24 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\TransactionHold;
 use App\Models\TransactionHoldEntry;
 
+use App\Authorizable;
+
 class TransactionHoldCrudController extends CrudController
 {
+	use Authorizable;
+	
 	public function setup()
 	{
+		$user = backpack_user();
+		$SalesRepID = $user->SalesRep_id;
+		//$inmuebles_ids = Avaluo::where([['institucion_id','=',$institucion_id],['estado','=',1]])->distinct('inmueble_id')->pluck('inmueble_id');
+		
+		if($SalesRepID)
+		{
+			TransactionHold::setCampoFiltro('SalesRepID');
+			TransactionHold::setValoresFiltro([$SalesRepID]);
+		}
+	
 		$this->crud->setModel('App\Models\TransactionHold');
 		$this->crud->setRoute(config('backpack.base.route_prefix') . '/pedidos');
 		$this->crud->setEntityNameStrings('pedido', 'pedidos');
