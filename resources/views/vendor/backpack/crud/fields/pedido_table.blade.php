@@ -445,6 +445,10 @@
 				nextPanel(panel_actual, step_activo);
 			});
 			
+			$(".modal-header .close").click(function (){	
+				resetModal();
+			});
+			
 			$(".modal-footer .btn-default").click(function (){	
 				resetModal();
 			});
@@ -585,12 +589,14 @@
 					productos_data.push(producto);
 				});
 				
-				modal_datatable = $('#products').DataTable({
+				modal_datatable = $('#products').removeAttr('width').DataTable({
 					scrollY:  "40vh",
 					scrollCollapse: true,
 					paging:   false,
 					ordering: false,
 					info:     false,
+					responsive: true,
+					fixedHeader: true,
 					data: productos_data,
 					columns: [
 						{ title: "" },
@@ -603,12 +609,12 @@
 						searchable: false,
 						className: 'select-checkbox',
 						targets:  [0],
-					},{
+					},
+					{
 						targets: [1],
 						visible: false, 
 						searchable: false,
-					},
-					],
+					}],
 					select: {
 						style:    'os',
 						selector: 'td:first-child'
@@ -616,7 +622,8 @@
 					language: {
 						"search":     	"Buscar:",
 						"zeroRecords":	"Ninguna coincidencia",
-					},					
+					},
+				
 				});
 				
 				$(".select-checkbox").mouseup(function(){
