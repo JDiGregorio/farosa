@@ -717,3 +717,14 @@ ul.actions li:last-child {
 /* =========================================*/
 /* --------------- END POPUP ---------------*/
 /* =========================================*/
+
+@media (max-width: 480px){
+	.ui-pnotify-mobile-able.ui-pnotify{
+		right: 5%;
+		left: 5%;
+		top: 10%;
+		font-size: 1em;
+	}
+}
+
+
