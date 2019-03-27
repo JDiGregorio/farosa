@@ -1,10 +1,29 @@
+@php
+
+	if(isset($id))
+	{
+		$comentario = $crud->model::find($id)->HoldComment;
+		$partes = explode("/", $comentario);
+		$tipo_pago = end($partes);
+		
+		$selected_credito = $tipo_pago == "CREDITO" ? "checked" : "";
+		$selected_contado = $tipo_pago == "CONTADO" ? "checked" : "";
+	}
+	else
+	{
+		$selected_credito = "";
+		$selected_contado = "checked";
+	}
+	
+@endphp
+
 <div @include('crud::inc.field_wrapper_attributes')>
 	<label>{!! $field['label'] !!}</label>
 	
 	<div class="switch-field">
-		<input type="radio" data-pago="credito" class="control-input-pago" id="credito" name="group">
+		<input type="radio" data-pago="credito" class="control-input-pago" id="credito" name="group" {{ $selected_credito }}>
 		<label id="label-credito" class="custom-control-label" for="credito">Credito</label>
-		<input type="radio" data-pago="contado" class="control-input-pago" id="contado" name="group" checked>
+		<input type="radio" data-pago="contado" class="control-input-pago" id="contado" name="group" {{ $selected_contado }}>
 		<label id="label-contado" class="custom-control-label" for="contado">Contado</label>
 	</div>
 		

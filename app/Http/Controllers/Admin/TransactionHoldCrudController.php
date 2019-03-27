@@ -49,6 +49,7 @@ class TransactionHoldCrudController extends CrudController
 			'name' => 'toggle_pago',
 			'label' => 'Forma de pago',
 			'type' => 'toggle_pago',
+			'model' => "App\Models\TransactionHold",
 			'wrapperAttributes' => [
 				'class' => 'form-group col-md-12',
 			],
@@ -58,8 +59,9 @@ class TransactionHoldCrudController extends CrudController
 			'name' => 'credito_disponible',
 			'label' => '',
 			'type' => 'credito_disponible',
+			'model' => "App\Models\TransactionHold",
 			'wrapperAttributes' => [
-				'class' => 'form-group col-md-12 oculto',
+				'class' => 'form-group col-md-12',
 			],
 		]);
 		
@@ -131,6 +133,8 @@ class TransactionHoldCrudController extends CrudController
 	
 	private function insertProductos($transactionhold, $entries)
 	{
+		$transactionhold->transactionholdentries()->delete();
+		
 		foreach($entries as $data){
 			$transactionhold->transactionholdentries()->create([
 				'TransactionHoldID' => $transactionhold->id,
@@ -148,6 +152,7 @@ class TransactionHoldCrudController extends CrudController
 	public function update(UpdateRequest $request)
 	{
 		$redirect_location = parent::updateCrud($request);
+		$this->insertProductos($this->crud->entry, $request->productos);
 		return $redirect_location;
 	}
 }

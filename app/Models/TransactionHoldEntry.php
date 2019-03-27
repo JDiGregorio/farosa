@@ -20,11 +20,7 @@ class TransactionHoldEntry extends Model
 						   'VoucherExpirationDate','DBTimeStamp','DiscountReasonCodeID','ReturnReasonCodeID','TaxChangeReasonCodeID',
 						   'ItemTaxID','ComponentQuantityReserved','TransactionTime','IsAddMoney','VoucherID'];
     // protected $hidden = [];
-    protected $visible = ['ID','TransactionHoldID','Description','QuantityPurchased','Price','FullPrice','Taxable','ItemID',
-						   'EntryKey','StoreID','RecallID','QuantityOnOrder','QuantityRTD','QuantityReserved','PriceSource',
-						   'Comment','DetailID','SalesRepID','SerialNumber1','SerialNumber2','SerialNumber3','VoucherNumber',
-						   'VoucherExpirationDate','DBTimeStamp','DiscountReasonCodeID','ReturnReasonCodeID','TaxChangeReasonCodeID',
-						   'ItemTaxID','ComponentQuantityReserved','TransactionTime','IsAddMoney','VoucherID'];
+    protected $visible = ['ID','TransactionHoldID','Description','QuantityPurchased','Price','ItemID','SalesRepID'];
 	
     /*------------------------------------------------------------------------
     | FUNCTIONS

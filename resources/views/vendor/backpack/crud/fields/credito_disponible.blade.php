@@ -1,18 +1,45 @@
+@php
+	
+	$estilo = "oculto";
+	$formatted_credito = "0.00";
+	
+	if(isset($id))
+	{
+		$pedido = $crud->model::find($id);
+		$comentario = $pedido->HoldComment;
+		$partes = explode("/", $comentario);
+		$tipo_pago = end($partes);
+		
+		if($tipo_pago == "CONTADO")
+		{
+			$estilo = "oculto";
+		}
+		else
+		{
+			$estilo = "";
+		}
+		
+		$credito = "App\Models\Customer"::find($pedido->CustomerID)->saldo();
+		$formatted_credito = number_format($credito, 2, '.', ',');
+
+	}
+	
+@endphp
+
 <div @include('crud::inc.field_wrapper_attributes')>
 
-		<div class="smart-button-container">
+		<div class="smart-button-container {{ $estilo }}">
 			<div class="smart-button">
 				<div class="icon-container" id="color">
 					<i class="fa fa-money" aria-hidden="true"></i>
 				</div>
 				<div class="info-container">
 					<div class="info-label"><span>Credito disponible</span></div>
-					<div class="info-qty">L. <span id="response">0.00</span></div>
+					<div class="info-qty">L. <span id="response">{{ $formatted_credito }}</span></div>
 				</div>
 			</div>
 		</div>
 
-	
 		{{-- HINT --}}
 		@if (isset($field['hint']))
 			<p class="help-block">{!! $field['hint'] !!}</p>

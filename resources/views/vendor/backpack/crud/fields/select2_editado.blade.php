@@ -26,7 +26,7 @@
 		@if (count($options))
             @foreach ($options as $option)
                 @if($current_value == $option->getKey())
-                    <option value="{{ $option->getKey() }}">{{ $option->{$field['attribute']} }}</option>
+                    <option value="{{ $option->getKey() }}" selected>{{ $option->{$field['attribute']} }}</option>
                 @else
                     <option value="{{ $option->getKey() }}">{{ $option->{$field['attribute']} }}</option>
                 @endif

@@ -1,3 +1,18 @@
+@php
+
+	$lineas_json = "[]";
+	
+	if(isset($id))
+	{
+		$pedido = $crud->model::find($id);
+		$lineas = $pedido->transactionholdentries()->get()->toJson(JSON_PRETTY_PRINT);
+		
+		$lineas_json = $lineas;
+		
+	}
+	
+@endphp
+
 <div @include('crud::inc.field_wrapper_attributes') >
 
     <label>{!! $field['label'] !!}</label>
@@ -182,7 +197,9 @@
 				};
 			}
 
-			var pedido = new Pedido(); 
+			var pedido = new Pedido();
+			pedido.linea_pedido = {!! $lineas_json !!}; 
+			
 			
 			$('select[name=CustomerID]').change(function () {
 				var id = $( this ).val();
@@ -214,9 +231,9 @@
 				$('form').append($(comment));
 				
 				if(radio_seleccion === 'credito'){
-					$('div.oculto').css('display','block');
+					$('div.smart-button-container').removeClass('oculto');
 				}else{
-					$('div.oculto').css('display','none');
+					$('div.smart-button-container').addClass('oculto');
 				}
 			});
 						
@@ -281,6 +298,9 @@
 						"emptyTable":	"No hay datos disponibles",
 					},
 				});
+				
+				pedido.dibujar_filas();
+				pedido.order_changed();
 				
 				$('#products-new').on("click", "button", function () {
 					

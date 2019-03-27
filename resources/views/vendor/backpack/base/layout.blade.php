@@ -90,10 +90,7 @@
 			<!-- /.content -->
 		</div><!-- /.content-wrapper -->
 		
-		<!-- Footer -->
-		<footer class="main-footer text-sm clearfix">
-			<a href="http://www.technolabs.hn"><i class=""></i>Hecho por: TechnoLabs</a>
-		</footer><!-- /.footer -->
+	
     </div><!-- ./wrapper -->
 
     @yield('before_scripts')

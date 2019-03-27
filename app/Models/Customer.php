@@ -19,7 +19,17 @@ class Customer extends Model
     /*------------------------------------------------------------------------
     | FUNCTIONS
     |------------------------------------------------------------------------*/
-
+	public function saldo()
+	{
+		$customer =  $this;
+		
+		$limite = $customer->CreditLimit;
+		$cuenta = $customer->AccountBalance;
+		
+		$disponible = $limite - $cuenta;
+		
+		return $disponible;
+	}
     /*------------------------------------------------------------------------
     | RELATIONS
     |------------------------------------------------------------------------*/
