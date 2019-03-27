@@ -305,7 +305,13 @@
 			$(document).ready(function(){
 				
 				var salesRepID = $("<input>").attr("type", "hidden").attr("name","SalesRepID").val({{ Backpack_auth()->user()->SalesRep_id }});
-				$('form').append($(salesRepID));
+				if(salesRepID != ''){
+					$('form').append($(salesRepID));
+				}else{
+					alert('No tiene un vendedor asignado a su usuario.');
+					window.location.href = '/admin/dashboard';
+				}
+				
 				
 				pedido.forma_pago = $("input.control-input-pago:checked").data('pago');
 					
@@ -483,6 +489,7 @@
 						$('div.modal-header h4.js-title-step').html('Ingrese cantidad.');
 						$('div.modal-footer button.btn-warning').css({'background-color':'#f4f4f4','border-color':'#ddd','color':'#000'});
 						$('div.modal-footer button.btn-success').css({'background-color':'#f4f4f4','border-color':'#ddd','color':'#000'});
+						$('.left-inner-addon span').addClass('hide');
 					}
 					if(step === 2){
 						$('.cantidad_product').val("0");
@@ -517,7 +524,8 @@
 				$('.custom-control-input').each(function(){
 					$(this).prop('checked',false);   
 				});
-	
+				
+				$('.left-inner-addon span').addClass('hide');
 				$('#ingreso-precio').val("");
 				$('#ingreso-precio').hide();				
 			}
@@ -547,6 +555,7 @@
 						$('.left-inner-addon span').removeClass('hide');
 						$('.left-inner-addon span').css('margin-top','20px');
 					}else {
+						$('.left-inner-addon span').addClass('hide');
 						$('#ingreso-precio').val("");
 						$('#ingreso-precio').hide();	
 					}
