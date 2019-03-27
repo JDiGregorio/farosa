@@ -1,6 +1,7 @@
 @php
 
 	$lineas_json = "[]";
+	$cliente = '{"custom_text_2":"", "disponible":0.0, "first_name":""}';
 	
 	if(isset($id))
 	{
@@ -8,6 +9,9 @@
 		$lineas = $pedido->transactionholdentries()->get()->toJson(JSON_PRETTY_PRINT);
 		
 		$lineas_json = $lineas;
+		
+		$customer = "App\Models\Customer"::find($pedido->CustomerID);
+		$cliente = '{"custom_text_2":"' . $customer->CustomText2 . '", "disponible":' . $customer->saldo() . ', "first_name":"' . $customer->FirstName . '"}';
 		
 	}
 	
@@ -126,7 +130,7 @@
 			var productos_data = [];
 			var productos_json = {};
 			var linea_pedido_tmp = {};
-			var cliente = {};
+			var cliente = {!! $cliente !!};
 						
 			class Pedido{
 				
@@ -199,6 +203,14 @@
 					$('input[name="total_pedido"]').val(this.Moneda(total));
 				}
 				
+				reset_comment = function(){
+					$(".hold-comment-input").remove();
+					
+					var comment_string = cliente.custom_text_2 + "/" + cliente.first_name + "/" + pedido.forma_pago;
+					var comment = $("<input>").attr("type", "hidden").attr("name","HoldComment").val(comment_string.toUpperCase()).addClass("hold-comment-input");
+					$('form').append($(comment));
+				};
+				
 				Moneda = function(total) {
 					if (!total || total == 'NaN') return '0.00';
 					
@@ -235,35 +247,25 @@
 			var pedido = new Pedido();
 			pedido.linea_pedido = {!! $lineas_json !!}; 
 			
-			
 			$('select[name=CustomerID]').change(function () {
 				var id = $( this ).val();
-				GetId(id);
-			});
-			
-			function GetId(id) {
+				
 				$.getJSON( "/admin/cliente/saldo/"+id, function(data) {
 					cliente = data[0];
 					var dato = format(data[0].disponible);
 					$("#response").text(dato);
 					
-					$(".hold-comment-input").remove();
-					
-					var comment_string = cliente.custom_text_2 + "/" + cliente.first_name + "/" + pedido.forma_pago;
-					var comment = $("<input>").attr("type", "hidden").attr("name","HoldComment").val(comment_string.toUpperCase()).addClass("hold-comment-input");
-					$('form').append($(comment));
+					pedido.reset_comment();
 				});
-			}
+				
+			});
 
 			$(".control-input-pago").change(function () {
 				var radio_seleccion = $(this).data('pago');
 				var forma_pago = $("input.control-input-pago:checked").data('pago');
-				pedido.forma_pago = forma_pago;
 				
-				$(".hold-comment-input").remove();
-				var comment_string = cliente.custom_text_2 + "/" + cliente.first_name + "/" + forma_pago;
-				var comment = $("<input>").attr("type", "hidden").attr("name","HoldComment").val(comment_string.toUpperCase()).addClass("hold-comment-input");
-				$('form').append($(comment));
+				pedido.forma_pago = forma_pago;
+				pedido.reset_comment();
 				
 				if(radio_seleccion === 'credito'){
 					$('div.smart-button-container').removeClass('oculto');
@@ -359,6 +361,7 @@
 				
 				pedido.dibujar_filas();
 				pedido.order_changed();
+				pedido.reset_comment();
 				
 				$('#products-new').on("click", "button", function () {
 					

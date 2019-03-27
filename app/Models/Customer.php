@@ -13,7 +13,7 @@ class Customer extends Model
     protected $table = 'Customer';
     protected $primaryKey = 'ID';
     protected $fillable = ['ID','FirstName','AccountNumber','CustomText1','CustomText2','AccountBalance','CreditLimit','SalesRepID'];
-    protected $visible = ['ID','FirstName'];
+    protected $visible = ['ID','FirstName', 'CustomText2'];
 	public $timestamps = false;
 	
     /*------------------------------------------------------------------------
