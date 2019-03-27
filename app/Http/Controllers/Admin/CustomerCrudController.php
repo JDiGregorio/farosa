@@ -18,6 +18,7 @@ class CustomerCrudController extends CrudController
         $this->crud->setModel('App\Models\Customer');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/clientes');
         $this->crud->setEntityNameStrings('cliente', 'clientes');
+		$this->crud->disableResponsiveTable();
 		
 		$this->crud->removeButton('create');
 		$this->crud->denyAccess(['update', 'delete','revisions']);

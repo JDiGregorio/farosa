@@ -19,6 +19,7 @@ class TransactionHoldCrudController extends CrudController
 		$this->crud->setModel('App\Models\TransactionHold');
 		$this->crud->setRoute(config('backpack.base.route_prefix') . '/pedidos');
 		$this->crud->setEntityNameStrings('pedido', 'pedidos');
+		$this->crud->disableResponsiveTable();
 		
 		$this->crud->removeButton('create');
 		$this->crud->denyAccess(['revisions']);
