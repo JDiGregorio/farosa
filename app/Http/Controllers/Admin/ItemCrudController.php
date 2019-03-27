@@ -19,6 +19,7 @@ class ItemCrudController extends CrudController
         $this->crud->setModel('App\Models\Item');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/productos');
         $this->crud->setEntityNameStrings('producto', 'productos');
+		$this->crud->disableResponsiveTable();
 		
 		$this->crud->removeButton('create');
 		$this->crud->denyAccess(['update', 'delete','revisions']);
