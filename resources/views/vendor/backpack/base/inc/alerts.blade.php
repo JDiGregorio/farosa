@@ -15,8 +15,7 @@
                 // title: 'Regular Notice',
                 text: "{!! str_replace('"', "'", $message) !!}",
                 type: "{{ $type }}",
-                icon: false,
-				delay: 100,
+				icon: false,
               });
             });
         @endforeach
