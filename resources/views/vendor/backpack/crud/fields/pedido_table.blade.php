@@ -67,7 +67,10 @@
 								</div>
 							@endif
 							
-							<input type="number" class="in-price" name="ingreso-precio" id="ingreso-precio" placeholder="Agregue el precio">
+							<div class="left-inner-addon">
+								<span class="hide">L.</span>
+								<input type="number" class="in-price" name="ingreso-precio" id="ingreso-precio" placeholder="Agregue el precio">
+							</div>
 						</div>
 					</div>
 				</div>
@@ -144,8 +147,8 @@
 				};
 				
 				order_changed = function(){
-					console.log("Order changed.");
 					this.set_orderlines();
+					this.reset_total_final(this.linea_pedido);
 				};
 				
 				set_orderlines = function(){
@@ -168,8 +171,40 @@
 					$(".attached-orderlines").remove();
 				}
 				
+				reset_total_final = function(){
+					var table = $('#products-new').DataTable();
+					var total = 0;
+					
+					$('input[name="total_pedido"]').val("");
+					
+					$(this.linea_pedido).each(function(key,val){
+						total = total + val.QuantityPurchased * val.Price;
+					});
+					
+					$('input[name="total_pedido"]').val(this.Moneda(total));
+				}
+				
 				Moneda = function(total) {
-					return total.toFixed(2);
+					if (!total || total == 'NaN') return '0.00';
+					
+					if (total == 'Infinity') return '&#x221e;';
+					total = total.toString().replace(/\$|\,/g, '');
+					
+					if (isNaN(total))
+					total = "0";
+						
+					var sign = (total == (total = Math.abs(total)));
+					total = Math.floor(total * 100 + 0.50000000001);
+					var cents = total % 100;
+					total = Math.floor(total / 100).toString();
+					
+					if (cents < 10)
+					cents = "0" + cents;
+					
+					for (var i = 0; i < Math.floor((total.length - (1 + i)) / 3) ; i++)
+					total = total.substring(0, total.length - (4 * i + 3)) + ',' + total.substring(total.length - (4 * i + 3));
+					
+					return (((sign) ? '' : '-') + total + '.' + cents);
 				};
 				
 				getObjectIndex = function(arr, key, val){
@@ -192,7 +227,7 @@
 			function GetId(id) {
 				$.getJSON( "/admin/cliente/saldo/"+id, function(data) {
 					cliente = data[0];
-					var dato = parseFloat(data[0].disponible).toFixed(2);
+					var dato = format(data[0].disponible);
 					$("#response").text(dato);
 					
 					$(".hold-comment-input").remove();
@@ -219,6 +254,29 @@
 					$('div.oculto').css('display','none');
 				}
 			});
+			
+			function format(num){
+				if (!num || num == 'NaN') return '0.00';
+				
+				if (num == 'Infinity') return '&#x221e;';
+				num = num.toString().replace(/\$|\,/g, '');
+				
+				if (isNaN(num))
+				num = "0";
+					
+				var sign = (num == (num = Math.abs(num)));
+				num = Math.floor(num * 100 + 0.50000000001);
+				var cents = num % 100;
+				num = Math.floor(num / 100).toString();
+				
+				if (cents < 10)
+				cents = "0" + cents;
+				
+				for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3) ; i++)
+				num = num.substring(0, num.length - (4 * i + 3)) + ',' + num.substring(num.length - (4 * i + 3));
+				
+				return (((sign) ? '' : '-') + num + '.' + cents);
+			};
 						
 /*====================================================================
    ------------------------- Tabla Pedido -------------------------   
@@ -251,12 +309,12 @@
 						searchable: false,
 					},
 					{ 
-						width: "50%",
+						width: "60%",
 						targets: [1], 
 						className: "text-center",
 					},
 					{ 
-						width: "10%",
+						width: "5%",
 						targets: [2], 
 						className: "text-center",
 					},
@@ -266,7 +324,7 @@
 						className: "precio-column text-center",						
 					},
 					{ 
-						width: "10%",
+						width: "5%",
 						targets: [4],
 						className: "text-center",
 					}],
@@ -339,9 +397,17 @@
 				}
 				
 				if(step_activo === 3){
+					var digit_price = $('#ingreso-precio').val();
+					
 					if($('#precio-4').prop("checked")){
-						var precio_digitado = parseFloat($("#ingreso-precio").val()).toFixed(2);
-						linea_pedido_tmp.Price = precio_digitado;
+						
+						if(digit_price != ""){
+							var precio_digitado = parseFloat(digit_price).toFixed(2);
+							linea_pedido_tmp.Price = precio_digitado;
+						}else{
+							alert('Debe agregar el precio.');
+							return;
+						}
 					}
 				}
 				
@@ -412,13 +478,10 @@
 					$('.modal-footer .btn-success').html('Siguiente');
 					$('.modal-footer .btn-warning').addClass('hide');
 					
-					//1. Limpiar el selected de la tabla de productos.
 					$("table#products tbody tr.selected").removeClass("selected");
 					
-					//2. Establecer en 0 la cantidad
 					$('.cantidad_product').val("0");
-					
-					//3. Quitar la seleccion de los radios, limpiar el text input y ocultarlo.
+		
 					clearFieldStep();
 					
 				}, 500);
@@ -455,6 +518,8 @@
 						
 					if($('#precio-4').prop("checked")){
 						$('#ingreso-precio').show();
+						$('.left-inner-addon span').removeClass('hide');
+						$('.left-inner-addon span').css('margin-top','20px');
 					}else {
 						$('#ingreso-precio').val("");
 						$('#ingreso-precio').hide();	

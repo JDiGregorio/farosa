@@ -63,7 +63,7 @@
 
 @push('scripts')
 	<script>
-		var link = '<?php echo redirect()->getUrlGenerator()->previous();?>'
+		var link = '{{ url($crud->route) }}'
 		
 		$('a.return').css('display','block');
 		$('a.return span i.fa').addClass('fa-reply');

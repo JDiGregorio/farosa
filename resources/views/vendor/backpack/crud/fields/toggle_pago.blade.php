@@ -55,8 +55,9 @@
 				}
 
 				.switch-field input:checked + label {
-					background-color: #aba5a5;
+					background-color: #4c4c4c9e;
 					box-shadow: none;
+					color: #FFF;
 				}
 
 				.switch-field label:first-of-type {
