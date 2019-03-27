@@ -22,7 +22,6 @@ class TransactionHoldCrudController extends CrudController
 	{
 		$user = backpack_user();
 		$SalesRepID = $user->SalesRep_id;
-		//$inmuebles_ids = Avaluo::where([['institucion_id','=',$institucion_id],['estado','=',1]])->distinct('inmueble_id')->pluck('inmueble_id');
 		
 		if($SalesRepID)
 		{
@@ -46,6 +45,12 @@ class TransactionHoldCrudController extends CrudController
 			'entity' => 'clientee', 
 			'attribute' => "FirstName", 
 			'model' => "App\Models\Customer",
+		]);
+		
+	$this->crud->addColumn([
+			'name' => 'HoldComment',
+			'label' => "Comentario",
+			'type' => "text",
 		]);
 		
 		$this->crud->addField([
