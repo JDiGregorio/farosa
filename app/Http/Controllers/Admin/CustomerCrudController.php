@@ -7,14 +7,28 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 use App\Http\Requests\CustomerRequest as StoreRequest;
 use App\Http\Requests\CustomerRequest as UpdateRequest;
 use Backpack\CRUD\CrudPanel;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Customer;
+use App\Authorizable;
 use View;
 
 class CustomerCrudController extends CrudController
 {
+	use Authorizable;
+	
     public function setup()
     {
+		
+		$user = backpack_user();
+		$SalesRepID = $user->SalesRep_id;
+		
+		if($SalesRepID)
+		{
+			Customer::setCampoFiltro('SalesRepID');
+			Customer::setValoresFiltro([$SalesRepID]);
+		}
+		
         $this->crud->setModel('App\Models\Customer');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/clientes');
         $this->crud->setEntityNameStrings('cliente', 'clientes');

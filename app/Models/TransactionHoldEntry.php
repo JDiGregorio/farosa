@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class TransactionHoldEntry extends Model
 {
@@ -25,7 +26,28 @@ class TransactionHoldEntry extends Model
     /*------------------------------------------------------------------------
     | FUNCTIONS
     |------------------------------------------------------------------------*/
-
+	
+	public static function boot()
+    {
+		parent::boot();
+		
+		if(isset(static::$_valoresFiltro))
+		{
+			static::addGlobalScope('accessiblex' . static::$_campoFiltro, function (Builder $builder){
+				$builder->whereIn(static::$_campoFiltro, static::$_valoresFiltro);
+			});
+		}
+		
+        self::creating(function($model)
+		{
+			// $default_expiration_date = Carbon::create(1899, 12, 30);
+			// $default_transaction_date = date('Y-m-d H:i:s.00');
+			
+			// $model->VoucherExpirationDate = $default_expiration_date;			
+			//$model->Transactiontime = $default_transaction_date;			
+        });
+	}
+	
     /*------------------------------------------------------------------------
     | RELATIONS
     |------------------------------------------------------------------------*/
