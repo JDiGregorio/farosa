@@ -2,6 +2,7 @@
 <html lang="{{ app()->getLocale() }}">
 <head>
     @include('backpack::inc.head')
+	<link rel="stylesheet" href="{{ asset('/css/custom.css') }}">
 </head>
 <body class="hold-transition {{ config('backpack.base.skin') }} fixed">
     <!-- Site wrapper -->

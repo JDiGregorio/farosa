@@ -47,7 +47,7 @@ class TransactionHoldCrudController extends CrudController
 			'model' => "App\Models\Customer",
 		]);
 		
-	$this->crud->addColumn([
+		$this->crud->addColumn([
 			'name' => 'HoldComment',
 			'label' => "Comentario",
 			'type' => "text",
@@ -55,11 +55,12 @@ class TransactionHoldCrudController extends CrudController
 		
 		$this->crud->addField([
 			'label' => "Cliente",
-			'type' => 'select2_editado',
+			'type' => 'select2_filtrable',
 			'name' => 'CustomerID',
 			'entity' => 'clientee',
 			'attribute' => 'FirstName',
 			'model' => "App\Models\Customer",
+			'filter' => ['SalesRepID','=',$SalesRepID],
 			'wrapperAttributes' => [
 				'class' => 'form-group col-md-12',
 			],
@@ -102,46 +103,7 @@ class TransactionHoldCrudController extends CrudController
 			'wrapperAttributes' => [
 				'class' => 'form-group col-md-12',
 			],
-		]);
-		
-		// $this->crud->addField([
-			// 'label' => "Vendedor",
-			// 'type' => 'select2_editado',
-			// 'name' => 'SalesRepID',
-			// 'entity' => 'salerep',
-			// 'attribute' => 'Name',
-			// 'model' => "App\Models\SaleRep",
-			// 'wrapperAttributes' => [
-				// 'class' => 'form-group col-md-12',
-			// ],
-		// ]);
-		
-		// $this->crud->addField([
-			// 'name' => 'TransactionTime',
-			// 'label' => 'Hora',
-			// 'type' => 'datetime_picker',
-			// 'datetime_picker_options' => [
-				// 'format' => 'YYYY-MM-DD HH:mm:ss',
-				// 'language' => 'es'
-			// ],
-			// 'wrapperAttributes' => [
-				// 'class' => 'form-group col-md-12',
-			// ],
-		// ]);
-		
-		// $this->crud->addField([
-			// 'name' => 'HoldComment',
-			// 'label' => 'Comentario',
-			// 'type' => 'textarea',
-			// 'attributes' => [
-				// 'placeholder' => 'Agregue el comentario',
-				// 'style' => 'text-align:justify;resize:vertical;',
-				// 'rows' => '5',
-			// ],
-			// 'wrapperAttributes' => [
-				// 'class' => 'form-group col-md-12',
-			// ],
-		// ]);	
+		]);	
 	}
 
 	public function store(StoreRequest $request)

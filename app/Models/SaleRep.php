@@ -28,7 +28,7 @@ class SaleRep extends Model
 	
 	public function customers()
 	{
-		return $this->hasMany('App\Models\Customer','SalesRepID');
+		return $this->hasMany('App\Models\Customer');
 	}
 	
 	public function transactionholds()

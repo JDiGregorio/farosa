@@ -10,8 +10,22 @@ body {
 	padding: 10px 0px;
 }
 
+.estilo{
+	color: #444;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
 .box-body {
     padding: 5px 20px;
+}
+
+.farosa-logo{
+	background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100px;
+	margin: 0px 50px 10px 50px;
 }
 
 .pad {
