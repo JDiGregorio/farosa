@@ -21,7 +21,7 @@ class TransactionHoldEntry extends Model
 						   'VoucherExpirationDate','DBTimeStamp','DiscountReasonCodeID','ReturnReasonCodeID','TaxChangeReasonCodeID',
 						   'ItemTaxID','ComponentQuantityReserved','TransactionTime','IsAddMoney','VoucherID'];
     // protected $hidden = [];
-    protected $visible = ['ID','TransactionHoldID','Description','QuantityPurchased','Price','ItemID','SalesRepID'];
+    protected $visible = ['ID','TransactionHoldID','Description','QuantityPurchased','Price','ItemID','SalesRepID','TransactionTime'];
 	
     /*------------------------------------------------------------------------
     | FUNCTIONS
@@ -40,11 +40,12 @@ class TransactionHoldEntry extends Model
 		
         self::creating(function($model)
 		{
-			// $default_expiration_date = Carbon::create(1899, 12, 30);
-			// $default_transaction_date = date('Y-m-d H:i:s.00');
+			$default_expiration_date = Carbon::create(1899, 12, 30)->toDateTimeLocalString();
+			$default_transaction_date = Carbon::now();
+			$default_transaction_date_string = $default_transaction_date->toDateTimeLocalString() . "." . substr($default_transaction_date->format("u"),0,3);
 			
-			// $model->VoucherExpirationDate = $default_expiration_date;			
-			//$model->Transactiontime = $default_transaction_date;			
+			$model->VoucherExpirationDate =$default_expiration_date;
+			$model->TransactionTime = str_replace(" ", "T", $model->transactionhold()->get()->first()->TransactionTime);
         });
 	}
 	
