@@ -395,7 +395,12 @@
 			$('div.contact-container ul.actions li a').mousedown(function (){
 				$('div.modal-header h4.js-title-step').html('Seleccione producto.');
 				$('div.modal-footer button.btn-success').css({'background-color':'#f4f4f4','border-color':'#ddd','color':'#000'});
-				modal_datatable.search("").draw();
+				modal_datatable.search("");
+				
+				setTimeout(function() {
+					modal_datatable.draw();
+				}, 400);
+				
 			});
 			
 			$(".modal-footer .btn-success").mousedown(function (){
@@ -583,9 +588,9 @@
 			$.getJSON( "/admin/producto/todos", function(productos){
 				productos_json = productos;
 				var rows_selected = [];
-				
+				console.log(productos);
 				$.each(productos, function(key, val){
-					var producto = ["",val.ID, val.Description, val.ItemLookupCode];
+					var producto = ["",val.ID, val.Description, val.ItemLookupCode, val.Quantity];
 					productos_data.push(producto);
 				});
 				
@@ -603,6 +608,7 @@
 						{ title: "ID" },
 						{ title: "Descripción" },
 						{ title: "Código" },
+						{ title: "Disponible" },
 					],
 					columnDefs: [{
 						orderable: false,
