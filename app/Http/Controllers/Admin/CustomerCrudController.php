@@ -21,10 +21,11 @@ class CustomerCrudController extends CrudController
     {
 		
 		$user = backpack_user();
-		$SalesRepID = $user->SalesRep_id;
 		
-		if($SalesRepID)
+		if(!$user->tipo_user)
 		{
+			$SalesRepID = $user->SalesRep_id;
+			
 			Customer::setCampoFiltro('SalesRepID');
 			Customer::setValoresFiltro([$SalesRepID]);
 		}

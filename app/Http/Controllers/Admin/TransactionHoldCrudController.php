@@ -23,12 +23,14 @@ class TransactionHoldCrudController extends CrudController
 		$user = backpack_user();
 		$SalesRepID = $user->SalesRep_id;
 		
-		if($SalesRepID)
+		$select_filtro = !$user->tipo_user ? ['SalesRepID','=',$SalesRepID] : ['ID','!=',Null];
+
+		if(!$user->tipo_user)
 		{
 			TransactionHold::setCampoFiltro('SalesRepID');
 			TransactionHold::setValoresFiltro([$SalesRepID]);
 		}
-	
+		
 		$this->crud->setModel('App\Models\TransactionHold');
 		$this->crud->setRoute(config('backpack.base.route_prefix') . '/pedidos');
 		$this->crud->setEntityNameStrings('pedido', 'pedidos');
@@ -60,7 +62,7 @@ class TransactionHoldCrudController extends CrudController
 			'entity' => 'clientee',
 			'attribute' => 'FirstName',
 			'model' => "App\Models\Customer",
-			'filter' => ['SalesRepID','=',$SalesRepID],
+			'filter' => $select_filtro,
 			'wrapperAttributes' => [
 				'class' => 'form-group col-md-12',
 			],
