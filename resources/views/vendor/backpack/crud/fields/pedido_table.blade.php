@@ -134,25 +134,27 @@
 			var modal_datatable = false;
 						
 			class Pedido{
+
+				constructor() {
+					this.linea_pedido = [];
+					this.forma_pago = "";
+				}
 				
-				linea_pedido = [];
-				forma_pago = "";
-				
-				agregar_linea = function(object){
+				agregar_linea(object){
 					this.linea_pedido.push(object);
 					this.dibujar_filas();
 					
 					this.order_changed();
-				};
+				}
 				
-				remover_linea = function(id){
+				remover_linea(id){
 					var indice = this.getObjectIndex(this.linea_pedido, "ID",id);
 					this.linea_pedido.splice(indice, 1);
 					
 					this.order_changed();
-				};
+				}
 				
-				dibujar_filas = function(){
+				dibujar_filas(){
 					var table = $('#products-new').DataTable();
 					var total = 0;
 					table.rows().remove().draw();
@@ -164,14 +166,14 @@
 					});
 					
 					$('input[name="total_pedido"]').val(this.Moneda(total));
-				};
+				}
 				
-				order_changed = function(){
+				order_changed(){
 					this.set_orderlines();
 					this.reset_total_final(this.linea_pedido);
-				};
+				}
 				
-				set_orderlines = function(){
+				set_orderlines(){
 					this.remove_orderlines();
 					
 					$.each(this.linea_pedido, function(index, linea){
@@ -185,13 +187,13 @@
 						$('form').append($(qty));
 						$('form').append($(price));
 					});
-				};
+				}
 				
-				remove_orderlines = function(){
+				remove_orderlines(){
 					$(".attached-orderlines").remove();
 				}
 				
-				reset_total_final = function(){
+				reset_total_final(){
 					var table = $('#products-new').DataTable();
 					var total = 0;
 					
@@ -204,15 +206,15 @@
 					$('input[name="total_pedido"]').val(this.Moneda(total));
 				}
 				
-				reset_comment = function(){
+				reset_comment(){
 					$(".hold-comment-input").remove();
 					
 					var comment_string = cliente.custom_text_2 + "/" + cliente.first_name + "/" + pedido.forma_pago;
 					var comment = $("<input>").attr("type", "hidden").attr("name","HoldComment").val(comment_string.toUpperCase()).addClass("hold-comment-input");
 					$('form').append($(comment));
-				};
+				}
 				
-				Moneda = function(total) {
+				Moneda(total) {
 					if (!total || total == 'NaN') return '0.00';
 					
 					if (total == 'Infinity') return '&#x221e;';
@@ -233,16 +235,16 @@
 					total = total.substring(0, total.length - (4 * i + 3)) + ',' + total.substring(total.length - (4 * i + 3));
 					
 					return (((sign) ? '' : '-') + total + '.' + cents);
-				};
+				}
 				
-				getObjectIndex = function(arr, key, val){
+				getObjectIndex(arr, key, val){
 					for (var i = 0; i < arr.length; i++) {
 					  if (arr[i][key] == val){
 						return i;	  
 					  }	
 					}
 					return -1;
-				};
+				}
 			}
 
 			var pedido = new Pedido();
