@@ -103,7 +103,7 @@ class UserCrudController extends CrudController
 			'wrapperAttributes' => [
 				'class' => 'form-group col-md-6',
 			],
-		],'update');	
+		],'both');	
     }
 
 	public function index()
