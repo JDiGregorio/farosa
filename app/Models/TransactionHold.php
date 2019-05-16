@@ -127,7 +127,7 @@ class TransactionHold extends Model
 			$model->DefaultReturnReasonCodeID = $default_cero;		
 			$model->DefaultTaxChangeReasonCodeID = $default_cero;		
 			$model->BatchNumber = $default_tres;
-        });
+		});
 		
 		self::deleting(function($model)
 		{

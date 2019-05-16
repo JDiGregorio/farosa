@@ -135,7 +135,12 @@ class TransactionHoldCrudController extends CrudController
 
 	public function update(UpdateRequest $request)
 	{
-		$redirect_location = parent::updateCrud($request);
+		$old_id = $request->ID;
+		$old_transaction = TransactionHold::find($old_id);
+		$old_transaction->transactionholdentries()->delete();
+		$old_transaction->delete();
+
+		$redirect_location = parent::storeCrud($request);
 		$this->insertProductos($this->crud->entry, $request->productos);
 		return $redirect_location;
 	}
