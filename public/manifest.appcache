@@ -1,0 +1,16 @@
+CACHE MANIFEST
+# V1 DATE 2019-06-05
+
+CACHE:
+/img/clientes.png
+/img/pedido.png
+/img/producto.png
+/img/salir.png
+/img/usuarios.png
+css/custom.css
+
+NETWORK:
+*
+
+FALLBACK:
+#static.html

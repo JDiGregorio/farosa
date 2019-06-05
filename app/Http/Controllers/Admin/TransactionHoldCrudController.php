@@ -9,10 +9,11 @@ use App\Http\Requests\TransactionHoldRequest as UpdateRequest;
 use Backpack\CRUD\CrudPanel;
 use Illuminate\Support\Facades\Auth;
 
+use App\Models\Customer;
 use App\Models\TransactionHold;
 use App\Models\TransactionHoldEntry;
-
 use App\Authorizable;
+use View;
 
 class TransactionHoldCrudController extends CrudController
 {
@@ -37,7 +38,8 @@ class TransactionHoldCrudController extends CrudController
 		$this->crud->disableResponsiveTable();
 		
 		$this->crud->removeButton('create');
-		$this->crud->denyAccess(['revisions']);
+		$this->crud->denyAccess(['update'],['revisions']);
+		$this->crud->addButtonFromView('line', 'view', 'view', 'beginning');
 		
 		$this->crud->addColumn([
 			'label' => "Cliente",
@@ -106,6 +108,54 @@ class TransactionHoldCrudController extends CrudController
 				'class' => 'form-group col-md-12',
 			],
 		]);	
+	}
+	
+	private function disponible($limite,$cuentaPendiente){		
+		$dispo = $limite - $cuentaPendiente;
+		$resultado = number_format($dispo, 2, '.', ',');
+		return $resultado;
+	}
+	
+	public function show($id)
+	{
+		$pedido = TransactionHold::where([['ID','=',$id]])->get();
+		$ID_customer = $pedido->first()->CustomerID;
+		$customer = Customer::where([['ID','=',$ID_customer]])->get();
+		$cliente= $customer->first()->FirstName;
+		
+		$comentario = $pedido->first()->HoldComment;
+		$partes = explode("/", $comentario);
+		$tipo_pago = end($partes);
+		
+		if($tipo_pago === "CREDITO"){
+			$disponible = $this->disponible($customer->first()->CreditLimit,$customer->first()->AccountBalance);
+		}else{
+			$disponible = "0.00";
+		}
+		
+		$productos = TransactionHoldEntry::where([['TransactionHoldID','=',$id]])->get();
+		
+		$total = 0;
+		
+		foreach($productos as $producto){
+			$multiplicacion = $producto->QuantityPurchased * $producto->FullPrice;
+			$total += $multiplicacion;
+		}
+		
+		$data = array(
+			"cliente" => $cliente,
+			"tipo_pago" => $tipo_pago,
+			"disponible" => $disponible,
+			"productos" => $productos,
+			"total" => $total,
+		);
+		
+		return View::make('form_views.preview_pedido')->with($data);
+	}
+	
+	public function edit($id)
+	{
+		return redirect('/admin/pedidos');
 	}
 
 	public function store(StoreRequest $request)
