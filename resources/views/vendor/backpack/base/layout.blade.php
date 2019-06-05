@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="{{ app()->getLocale() }}" manifest="manifest.appcache">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,6 +35,7 @@
     {{-- <link rel="stylesheet" href="{{ asset('vendor/backpack/backpack.base.css') }}?v=2"> --}}
     {{-- <link rel="stylesheet" href="{{ asset('vendor/backpack/overlays/backpack.bold.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('/css/custom.css') }}">
+    <!-- <link rel="manifest" href="{{ asset('manifest.json') }}"> -->
 
     @yield('after_styles')
     @stack('after_styles')

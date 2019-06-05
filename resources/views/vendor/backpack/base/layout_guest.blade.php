@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="{{ app()->getLocale() }}" manifest="manifest.appcache">
 <head>
     @include('backpack::inc.head')
 	<link rel="stylesheet" href="{{ asset('/css/custom.css') }}">

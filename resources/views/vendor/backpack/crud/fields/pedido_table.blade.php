@@ -590,7 +590,6 @@
 			$.getJSON( "/admin/producto/todos", function(productos){
 				productos_json = productos;
 				var rows_selected = [];
-				console.log(productos);
 				$.each(productos, function(key, val){
 					var producto = ["",val.ID, val.Description, val.ItemLookupCode, val.Quantity];
 					productos_data.push(producto);

@@ -67,7 +67,7 @@ class Customer extends Model
 	
 	public function transactionholds()
 	{
-		return $this->hasMany('App\Models\TransactionHold','CustomerID');
+		return $this->hasMany('App\Models\TransactionHold');
 	}
 	
     /*------------------------------------------------------------------------

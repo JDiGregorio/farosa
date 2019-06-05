@@ -59,6 +59,10 @@ body {
     border-radius: 5px;
 }
 
+.table-responsive{
+	border: 0px solid #ddd;
+}
+
 .return{
 	display: none;
 	cursor: pointer;
