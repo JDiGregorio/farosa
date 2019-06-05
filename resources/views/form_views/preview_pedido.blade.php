@@ -80,7 +80,7 @@
 		
 		$('table.products').css('border','1px solid #ccc');
 		
-		var link = '<?php echo redirect()->getUrlGenerator()->previous();?>';
+		var link = '/admin/pedidos';
 		
 		$('a.return').css('display','block');
 		$('a.return span i.fa').addClass('fa-reply');

@@ -2,12 +2,23 @@ CACHE MANIFEST
 # V1 DATE 2019-06-05
 
 CACHE:
+/img/logo_farosa.png
 /img/clientes.png
 /img/pedido.png
 /img/producto.png
 /img/salir.png
 /img/usuarios.png
 css/custom.css
+/favicon.ico
+
+/vendor/adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css
+/vendor/adminlte/dist/css/AdminLTE.min.css
+/vendor/adminlte/dist/css/skins/_all-skins.min.css
+/vendor/adminlte/plugins/pace/pace.min.css
+/vendor/backpack/pnotify/pnotify.custom.min.css
+/vendor/backpack/crud/css/crud.css
+/vendor/backpack/crud/css/form.css
+/vendor/backpack/crud/css/list.css
 
 NETWORK:
 *
