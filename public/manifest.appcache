@@ -8,7 +8,7 @@ CACHE:
 /img/producto.png
 /img/salir.png
 /img/usuarios.png
-css/custom.css
+/css/custom.css
 /favicon.ico
 
 /vendor/adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css

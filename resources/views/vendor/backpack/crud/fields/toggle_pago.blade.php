@@ -37,9 +37,8 @@
   {{-- FIELD EXTRA CSS  --}}
   {{-- push things in the after_styles section --}}
 
-      @push('crud_fields_styles')
-		
-         <style>
+		@push('crud_fields_styles')		
+			<style>
 				.switch-field {
 					display: flex;
 					overflow: hidden;
@@ -86,9 +85,8 @@
 				.switch-field label:last-of-type {
 					border-radius: 0 4px 4px 0;
 				}
-		 </style>
-		 
-      @endpush
+			</style>
+		@endpush
 
 
   {{-- FIELD EXTRA JS --}}

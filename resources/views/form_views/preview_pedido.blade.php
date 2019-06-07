@@ -7,8 +7,14 @@
 			<div class="contenedor col-lg-12">
 				<form class="cd-form floating-labels">
 					<fieldset>
+						
 						<legend>{{ $cliente }}</legend>
-						<label class="label-title" data-tipo="{{ $tipo_pago }}">Forma de pago: {{ $tipo_pago }}</label>
+						
+						<div class="icon right-inner-addon">
+							<label id="cd-date" class="cd-label">Fecha: {{ $fecha }}</label>
+							<label class="label-title" data-tipo="{{ $tipo_pago }}">Forma de pago: {{ $tipo_pago }}</label>
+							<hr class="cd-spacing">
+						</div>
 						
 						<div id="disponible" class="icon left-inner-addon oculto">
 							<label class="cd-label" for="cd-acount">Credito disponible:</label>
@@ -18,12 +24,13 @@
 						
 						<div class="icon table-responsive">
 							<label class="cd-label" for="cd-email">Productos:</label>
-							<table class="table table-bordered products">
+							<table class="table table-striped table-hover products">
 								<thead>
 									<tr>
 										<th style="font-size: 1.4rem;padding: 10px 5px;">Descripción</th>
 										<th style="font-size: 1.4rem;padding: 10px 5px;">Qty</th>
 										<th style="font-size: 1.4rem;padding: 10px 5px;text-align: center;">Precio</th>
+										<th style="font-size: 1.4rem;padding: 10px 5px;text-align: center;">Total linea</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -37,6 +44,9 @@
 											</td> 
 											<td style="font-size: 1.4rem;text-align: right;">
 												L. {{ number_format($producto->FullPrice,2,'.','') }}
+											</td>
+											<td style="font-size: 1.4rem;text-align: right;">
+												L. {{ number_format($producto->QuantityPurchased * $producto->FullPrice,2,'.','') }}
 											</td>
 										</tr>
 									@endforeach
