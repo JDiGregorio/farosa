@@ -73,8 +73,7 @@ class TransactionHoldCrudController extends CrudController
 		$this->crud->addField([
 			'name' => 'toggle_pago',
 			'label' => 'Forma de pago',
-			'type' => 'toggle_pago',
-			'model' => "App\Models\TransactionHold",
+			'type' => 'select2_pago',
 			'wrapperAttributes' => [
 				'class' => 'form-group col-md-12',
 			],
@@ -121,7 +120,8 @@ class TransactionHoldCrudController extends CrudController
 		$pedido = TransactionHold::where([['ID','=',$id]])->get();
 		$ID_customer = $pedido->first()->CustomerID;
 		$customer = Customer::where([['ID','=',$ID_customer]])->get();
-		$cliente= $customer->first()->FirstName;
+		$cliente = $customer->first()->FirstName;
+		$fecha = str_replace('-', ' / ', date("d-m-Y", strtotime($pedido->first()->TransactionTime)));
 		
 		$comentario = $pedido->first()->HoldComment;
 		$partes = explode("/", $comentario);
@@ -144,6 +144,7 @@ class TransactionHoldCrudController extends CrudController
 		
 		$data = array(
 			"cliente" => $cliente,
+			"fecha" => $fecha,
 			"tipo_pago" => $tipo_pago,
 			"disponible" => $disponible,
 			"productos" => $productos,

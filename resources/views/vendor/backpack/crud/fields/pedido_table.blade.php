@@ -263,14 +263,14 @@
 				
 			});
 
-			$(".control-input-pago").change(function () {
-				var radio_seleccion = $(this).data('pago');
-				var forma_pago = $("input.control-input-pago:checked").data('pago');
+			$("select[name=toggle_pago]").change(function () {
+				var forma_pago = $(this).val();
+				//var forma_pago = $("input.control-input-pago:checked").data('pago');
 				
 				pedido.forma_pago = forma_pago;
 				pedido.reset_comment();
 				
-				if(radio_seleccion === 'credito'){
+				if(forma_pago === 'credito'){
 					$('div.smart-button-container').removeClass('oculto');
 				}else{
 					$('div.smart-button-container').addClass('oculto');
@@ -315,7 +315,8 @@
 				}
 				
 				
-				pedido.forma_pago = $("input.control-input-pago:checked").data('pago');
+				// pedido.forma_pago = $("input.control-input-pago:checked").data('pago');
+				pedido.forma_pago = $("select[name=toggle_pago]").val();
 					
 				var table = $('#products-new').removeAttr('width').DataTable({
 					scrollX:  true,
