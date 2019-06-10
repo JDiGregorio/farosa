@@ -73,7 +73,7 @@ class TransactionHoldCrudController extends CrudController
 		$this->crud->addField([
 			'name' => 'toggle_pago',
 			'label' => 'Forma de pago',
-			'type' => 'select2_pago',
+			'type' => 'toggle_pago',
 			'wrapperAttributes' => [
 				'class' => 'form-group col-md-12',
 			],

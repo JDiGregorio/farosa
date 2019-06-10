@@ -210,7 +210,7 @@ body {
 }
 .cd-form div {
 	position: relative;
-    margin: 0px 0px 10px 0px;
+    margin: 10px 0px 10px 0px;
 }
 .cd-form h4, .cd-form .cd-label {
 	font-size: 1.5rem;

@@ -17,7 +17,6 @@ class TransactionHoldRequest extends FormRequest
 		return [
 			'productos' => 'required',
 			'CustomerID' => 'required',
-			'toggle_pago' => 'required',
 		];
 	}
 
@@ -31,7 +30,6 @@ class TransactionHoldRequest extends FormRequest
 		return [
 			'productos.required' => 'Necesita seleccionar al menos un producto.',
 			'CustomerID.required' => 'Necesita seleccionar el cliente.',
-			'toggle_pago.required' => 'Necesita seleccionar la forma de pago.',
 		];
 	}
 }

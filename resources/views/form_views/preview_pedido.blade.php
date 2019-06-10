@@ -43,10 +43,10 @@
 												{{ number_format($producto->QuantityPurchased) }}
 											</td> 
 											<td style="font-size: 1.4rem;text-align: right;">
-												L. {{ number_format($producto->FullPrice,2,'.','') }}
+												L. {{ number_format($producto->FullPrice,2,'.',',') }}
 											</td>
 											<td style="font-size: 1.4rem;text-align: right;">
-												L. {{ number_format($producto->QuantityPurchased * $producto->FullPrice,2,'.','') }}
+												L. {{ number_format($producto->QuantityPurchased * $producto->FullPrice,2,'.',',') }}
 											</td>
 										</tr>
 									@endforeach
