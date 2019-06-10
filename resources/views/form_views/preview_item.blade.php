@@ -22,25 +22,25 @@
 						
 						<div class="icon">
 							<label class="cd-label" for="cd-email">Precios:</label>
-							<table class="table table-bordered">
+							<table class="table table-bordered table-hover">
 								<tr><th style="width:70%;">Precio Principal</th>
 									<td style="text-align: right;">
-										L. {{ number_format($item->first()->Price,2,'.','') }}
+										L. {{ number_format($item->first()->Price,2,'.',',') }}
 									</td> 
 								</tr>
 								<tr><th style="width:70%;">Precio A</th>
 									<td style="text-align: right;">
-										L. {{ number_format($item->first()->PriceA,2,'.','') }}
+										L. {{ number_format($item->first()->PriceA,2,'.',',') }}
 									</td> 
 								</tr>
 								<tr><th style="width:70%;">Precio B</th>
 									<td style="text-align: right;">
-										L. {{ number_format($item->first()->PriceB,2,'.','') }}
+										L. {{ number_format($item->first()->PriceB,2,'.',',') }}
 									</td> 
 								</tr>
 								<tr><th style="width:70%;">Precio C</th>
 									<td style="text-align: right;">
-										L. {{ number_format($item->first()->PriceC,2,'.','') }}
+										L. {{ number_format($item->first()->PriceC,2,'.',',') }}
 									</td>
 								</tr>
 							</table>

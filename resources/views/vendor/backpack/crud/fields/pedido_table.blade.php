@@ -263,9 +263,10 @@
 				
 			});
 
-			$("select[name=toggle_pago]").change(function () {
-				var forma_pago = $(this).val();
-				//var forma_pago = $("input.control-input-pago:checked").data('pago');
+			
+			$(".control-input-pago").change(function () {
+
+				var forma_pago = $(this).data('pago');
 				
 				pedido.forma_pago = forma_pago;
 				pedido.reset_comment();
@@ -315,8 +316,7 @@
 				}
 				
 				
-				// pedido.forma_pago = $("input.control-input-pago:checked").data('pago');
-				pedido.forma_pago = $("select[name=toggle_pago]").val();
+				pedido.forma_pago = $("input.control-input-pago:checked").data('pago');
 					
 				var table = $('#products-new').removeAttr('width').DataTable({
 					scrollX:  true,
