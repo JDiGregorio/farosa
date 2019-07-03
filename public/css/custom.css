@@ -534,9 +534,30 @@ FLoating labels
     z-index: 3;
     color: #fff;
     cursor: default;
-    background-color: #357ca5;
-    border-color: #357ca5;
+    background-color: #dd4b39;
+    border-color: #dd4b39;
     margin: 2px;
+}
+
+.btn-primary {
+    background-color: #dd4b39;
+    border-color: #dd4b39;
+}
+
+a {
+    color: #dd4b39;
+}
+
+.content-wrapper{
+    background-color: #ffffff;
+}
+
+.btn-primary:hover, .btn-primary:active, .btn-primary.hover{
+    background-color: darkgray!important;
+}
+
+.btn-primary.focus, .btn-primary:focus{
+    background-color: darkgray!important;
 }
 
 .pagination>li>a {

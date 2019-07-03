@@ -12,11 +12,11 @@ return [
     */
 
     // Project name. Shown in the breadcrumbs and a few other places.
-    'project_name' => 'Farosa',
+    'project_name' => 'Bodega Rivera',
 
     // Menu logos
-    'logo_lg'   => '<b>Farosa</b>',
-    'logo_mini' => '<b>F</b>',
+    'logo_lg'   => '<b>BRivera</b>',
+    'logo_mini' => '<b>BR</b>',
 
     // Developer or company name. Shown in footer.
     'developer_name' => '',
@@ -28,7 +28,7 @@ return [
     'show_powered_by' => false,
 
     // The AdminLTE skin. Affects menu color and primary/secondary colors used throughout the application.
-    'skin' => 'skin-blue',
+    'skin' => 'skin-red',
     // Options: skin-black, skin-blue, skin-purple, skin-red, skin-yellow, skin-green, skin-blue-light, skin-black-light, skin-purple-light, skin-green-light, skin-red-light, skin-yellow-light
 
     // Date & Datetime Format Syntax: https://github.com/jenssegers/date#usage
