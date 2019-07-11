@@ -3,7 +3,10 @@
 @section('content')
     <div class="row m-t-40">
         <div class="col-md-4 col-md-offset-4">
-			<div class="farosa-logo" style="background-image: url('/img/logo_farosa.png');"></div>
+			
+			<div style="width:100%;margin-bottom:20px;">
+				<img src="/img/logo.png" width="100%" height="auto"/>
+			</div>
             <div class="box">
                 <div class="box-body">
 					<form class="col-md-12 p-t-10" role="form" method="POST" action="{{ route('backpack.auth.login') }}">

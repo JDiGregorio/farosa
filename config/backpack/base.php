@@ -12,11 +12,11 @@ return [
     */
 
     // Project name. Shown in the breadcrumbs and a few other places.
-    'project_name' => 'Farosa',
+    'project_name' => 'Bodega Danery',
 
     // Menu logos
-    'logo_lg'   => '<b>Farosa</b>',
-    'logo_mini' => '<b>F</b>',
+    'logo_lg'   => '<b>BDanery</b>',
+    'logo_mini' => '<b>BD</b>',
 
     // Developer or company name. Shown in footer.
     'developer_name' => '',
