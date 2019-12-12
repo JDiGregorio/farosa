@@ -265,9 +265,14 @@ body {
 }
 
 .cd-form textarea {
-  min-height: 200px;
-  resize: vertical;
-  overflow: auto;
+    resize: none;
+    overflow: auto;
+    font-size: 1.3rem;
+    font-weight: 400;
+    padding: 5px;
+    color: #000;
+    border-radius: 5px;
+    background-color: #fbfbfb;
 }
 
 .cd-form input[type="button"] {

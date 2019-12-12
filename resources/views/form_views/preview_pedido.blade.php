@@ -55,10 +55,16 @@
 						</div>
 						
 						<div class="icon left-inner-addon">
-							<label class="cd-label" for="cd-acount">Total:</label>
+							<label class="cd-label">Total:</label>
 							<span>L.</span>
-							<input class="input-dinero" type="text" name="cd-acount" id="cd-acount" value="{{ number_format($total, 2, '.', ',') }}" readonly>
+							<input class="input-dinero" type="text" name="cd-acount" value="{{ number_format($total, 2, '.', ',') }}" readonly>
 						</div>
+						@if($detalle)
+							<div class="icon">
+								<label class="cd-label">Detalle de pedido:</label>
+								<textarea class="input-detalle" name="cd-acount" readonly rows="3">{{ $detalle }}</textarea>
+							</div>
+						@endif
 					</fieldset>
 				</form>
 			</div>

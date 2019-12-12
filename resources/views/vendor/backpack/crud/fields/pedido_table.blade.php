@@ -133,11 +133,12 @@
 			var cliente = {!! $cliente !!};
 			var modal_datatable = false;
 						
-			class Pedido{
+			class Pedido {
 
 				constructor() {
 					this.linea_pedido = [];
 					this.forma_pago = "";
+					this.detalle = "";
 				}
 				
 				agregar_linea(object){
@@ -208,8 +209,13 @@
 				
 				reset_comment(){
 					$(".hold-comment-input").remove();
+					var detalle = "";
 					
-					var comment_string = cliente.custom_text_2 + "/" + cliente.first_name + "/" + pedido.forma_pago;
+					if(pedido.detalle) {
+						detalle = "/" + pedido.detalle;
+					}
+
+					var comment_string = cliente.custom_text_2 + "/" + cliente.first_name + "/" + pedido.forma_pago + detalle;
 					var comment = $("<input>").attr("type", "hidden").attr("name","HoldComment").val(comment_string.toUpperCase()).addClass("hold-comment-input");
 					$('form').append($(comment));
 				}
@@ -276,6 +282,12 @@
 				}else{
 					$('div.smart-button-container').addClass('oculto');
 				}
+			});
+			
+			$("#detalle-pedido").on('change keyup',function() {
+				var detalle = $(this).val();
+				pedido.detalle = detalle;
+				pedido.reset_comment();
 			});
 			
 			function format(num){

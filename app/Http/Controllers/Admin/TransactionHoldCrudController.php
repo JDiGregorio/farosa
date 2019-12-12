@@ -106,7 +106,16 @@ class TransactionHoldCrudController extends CrudController
 			'wrapperAttributes' => [
 				'class' => 'form-group col-md-12',
 			],
-		]);	
+		]);
+
+		$this->crud->addField([
+			'name' => 'detalle_pedido',
+			'label' => 'Detalle de pedido',
+			'type' => 'textarea',
+			'wrapperAttributes' => [
+				'class' => 'form-group col-md-12',
+			],
+		]);		
 	}
 	
 	private function disponible($limite,$cuentaPendiente){		
@@ -125,7 +134,14 @@ class TransactionHoldCrudController extends CrudController
 		
 		$comentario = $pedido->first()->HoldComment;
 		$partes = explode("/", $comentario);
-		$tipo_pago = end($partes);
+		$tipo_pago = $partes[2];
+		
+
+		if(isset($partes[3])) {
+			$detalle = $partes[3];
+		} else {
+			$detalle = "";
+		}
 		
 		if($tipo_pago === "CREDITO"){
 			$disponible = $this->disponible($customer->first()->CreditLimit,$customer->first()->AccountBalance);
@@ -146,6 +162,7 @@ class TransactionHoldCrudController extends CrudController
 			"cliente" => $cliente,
 			"fecha" => $fecha,
 			"tipo_pago" => $tipo_pago,
+			"detalle" => $detalle,
 			"disponible" => $disponible,
 			"productos" => $productos,
 			"total" => $total,
