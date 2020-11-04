@@ -38,7 +38,6 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
     && echo "extension=sqlsrv.so" >> `php --ini | grep "Scan for additional .ini files" | sed -e "s|.*:\s*||"`/30-sqlsrv.ini \
     && apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
-RUN apt-get install freetds-common freetds-bin unixodbc php7.2-sybase
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=1.10.17
 
