@@ -54,7 +54,7 @@ services:
             ACCEPT_EULA: Y
             SA_PASSWORD: wMnck4aG3DJv6JoUYN3y
         volumes:
-            - dbdata:/var/opt/mssql/data
+            - ./dbdata:/var/opt/mssql/data
         networks:
             - farosa-network
 
