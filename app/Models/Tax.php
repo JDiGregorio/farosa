@@ -8,6 +8,6 @@ class Tax extends Model
 {
     protected $table = 'Tax';
     protected $primaryKey = 'ID';
-    protected $fillable = ['ID','Description','Percentage','Price','Code'];
+    protected $fillable = ['Description','Percentage','FixedAmount','Code'];
 	public $timestamps = false;
 }
