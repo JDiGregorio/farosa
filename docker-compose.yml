@@ -31,16 +31,6 @@ services:
             farosa-network:
                 aliases:
                     - farosa.technolabs.hn
-    redis:
-        image: redis:alpine
-        container_name: farosa-redis
-        command: redis-server --appendonly yes --requirepass "${REDIS_PASSWORD}"
-        volumes:
-            - ./data/redis:/data
-        ports:
-            - "${REDIS_PORT}:6379"
-        networks:
-            - farosa-network
 
     farosa-db:
         image: mcr.microsoft.com/mssql/server:latest
