@@ -1,0 +1,57 @@
+version: '3'
+services:
+    farosa-app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: farosa-app
+        restart: unless-stopped
+        tty: true
+        environment:
+            SERVICE_NAME: farosa-app
+            SERVICE_TAGS: dev
+        working_dir: /var/www
+        volumes:
+            - ./:/var/www
+            - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+        networks:
+            - farosa-network
+
+    farosa-nginx:
+        image: nginx:alpine
+        container_name: farosa-nginx
+        restart: unless-stopped
+        tty: true
+        ports:
+            - "80:80"
+        volumes:
+            - ./:/var/www
+            - ./nginx/conf.d/dev/:/etc/nginx/conf.d/
+        networks:
+            farosa-network:
+                aliases:
+                    - farosa.technolabs.hn
+
+    farosa-db:
+        image: mcr.microsoft.com/mssql/server:latest
+        container_name: farosa-db
+        restart: unless-stopped
+        user: root
+        tty: true
+        ports:
+            - "1433:1433"
+        environment:
+            ACCEPT_EULA: Y
+            SA_PASSWORD: wMnck4aG3DJv6JoUYN3y
+        volumes:
+            - ./dbdata:/var/opt/mssql/data
+        networks:
+            - farosa-network
+
+networks:
+    farosa-network:
+        driver: bridge
+
+volumes:
+    dbdata:
+        driver: local
