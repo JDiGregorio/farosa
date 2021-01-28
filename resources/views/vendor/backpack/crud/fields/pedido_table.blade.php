@@ -142,6 +142,7 @@
 				}
 				
 				agregar_linea(object){
+					console.log(object);
 					this.linea_pedido.push(object);
 					this.dibujar_filas();
 					
@@ -162,8 +163,8 @@
 					$('input[name="total_pedido"]').val("");
 					
 					$(this.linea_pedido).each(function(key,val){
-						table.row.add([val.ID,val.Description,val.QuantityPurchased,'L. '+val.Price,'']).draw();
-						total = total + val.QuantityPurchased * val.Price;
+						table.row.add([val.ID,val.Description,val.QuantityPurchased,'L. '+val.Price, val.TaxDescription, val.QuantityPurchased * val.Price *  val.TaxPorcentage, '']).draw();
+						total = total + val.QuantityPurchased * val.Price * val.TaxPorcentage;
 					});
 					
 					$('input[name="total_pedido"]').val(this.Moneda(total));
@@ -201,9 +202,8 @@
 					$('input[name="total_pedido"]').val("");
 					
 					$(this.linea_pedido).each(function(key,val){
-						total = total + val.QuantityPurchased * val.Price;
+						total = total + val.QuantityPurchased * val.Price * val.TaxPorcentage;
 					});
-					
 					$('input[name="total_pedido"]').val(this.Moneda(total));
 				}
 				
@@ -255,6 +255,7 @@
 
 			var pedido = new Pedido();
 			pedido.linea_pedido = {!! $lineas_json !!}; 
+			console.log(pedido.linea_pedido);
 			
 			$('select[name=CustomerID]').change(function () {
 				var id = $( this ).val();
@@ -374,6 +375,8 @@
 						{ title: "Descripción" },
 						{ title: "Qty" },
 						{ title: "Precio" },
+						{ title: "Impuesto" },
+						{ title: "Subtotal" },
 						{ title: "Acción" },
 					],
 					language: {
@@ -601,10 +604,10 @@
 			});		
 			
 			$.getJSON( "/admin/producto/todos", function(productos){
-				productos_json = productos;
+				productos_json = productos.data;
 				var rows_selected = [];
-				$.each(productos, function(key, val){
-					var producto = ["",val.ID, val.Description, val.ItemLookupCode, val.Quantity];
+				$.each(productos.data, function(key, val){
+					var producto = ["",val.ID, val.Description, val.ItemLookupCode, val.Quantity, val.TaxPorcentage, val.TaxDescription];
 					productos_data.push(producto);
 				});
 				
@@ -623,6 +626,7 @@
 						{ title: "Descripción" },
 						{ title: "Código" },
 						{ title: "Disponible" },
+						
 					],
 					columnDefs: [{
 						orderable: false,
@@ -653,7 +657,11 @@
 					else{
 						var codigo = $(this).next().next().text();
 						var seleccionado = _.find(productos_json, ["ItemLookupCode", codigo]);
+						console.log(seleccionado);
 						linea_pedido_tmp.ID = seleccionado.ID;
+						linea_pedido_tmp.TaxPorcentage = seleccionado.TaxPorcentage;
+						linea_pedido_tmp.TaxDescription = seleccionado.TaxDescription;
+						linea_pedido_tmp.Taxable = seleccionado.Taxable;
 						linea_pedido_tmp.Description = seleccionado.Description;
 						$('#label-0').html('Precio Principal - '+ parseFloat(seleccionado.Price).toFixed(2));
 						$('#label-1').html('Precio A - '+ parseFloat(seleccionado.PriceA).toFixed(2));
