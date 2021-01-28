@@ -12,8 +12,8 @@ class Item extends Model
 
     protected $table = 'Item';
     protected $primaryKey = 'ID';
-    protected $fillable = ['ID','Description','ItemLookupCode','Price','PriceA','PriceB','PriceC','Quantity'];
-    protected $visible = ['ID','Description','ItemLookupCode','Price','PriceA','PriceB','PriceC','Quantity'];
+    protected $fillable = ['ID','Description','ItemLookupCode','Price','PriceA','PriceB','PriceC','Quantity', 'TaxID'];
+    protected $visible = ['ID','Description','ItemLookupCode','Price','PriceA','PriceB','PriceC','Quantity', 'TaxID'];
 	public $timestamps = false;
 
     /*------------------------------------------------------------------------
@@ -28,7 +28,11 @@ class Item extends Model
 	{
 		return $this->hasMany('App\Models\TransactionHoldEntry','ItemID');
 	}
-	
+    
+    public function tax()
+	{
+		return $this->belongsTo('App\Models\Tax','TaxID');
+	}
     /*------------------------------------------------------------------------
     | SCOPES
     |------------------------------------------------------------------------*/
