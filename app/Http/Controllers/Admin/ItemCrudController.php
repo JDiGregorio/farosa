@@ -6,6 +6,7 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 
 use App\Http\Requests\ItemRequest as StoreRequest;
 use App\Http\Requests\ItemRequest as UpdateRequest;
+use App\Http\Resources\ItemResorce;
 use Backpack\CRUD\CrudPanel;
 
 use App\Models\Item;
@@ -66,8 +67,6 @@ class ItemCrudController extends CrudController
 	
 	public function get_items()
 	{
-		$productos = Item::all();
-		
-		return $productos;
+		return ItemResorce::collection(Item::all());
 	}
 }
