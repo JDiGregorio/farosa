@@ -158,9 +158,15 @@ class TransactionHoldCrudController extends CrudController
 		foreach($productos as $producto){
 			$multiplicacion = $producto->QuantityPurchased * $producto->FullPrice;
 			if($producto->Taxable == 1) {
-				$taxItem = ItemTax::find($producto->TaxItemId);
-				$tax = Tax::find($taxItem->TaxID01);
-				$multiplicacion = $producto->QuantityPurchased * ($producto->FullPrice * (1 + $tax->Percentage));
+				$taxItem = ItemTax::find($producto->ItemTaxID);
+				if ($taxItem) {
+					$tax = Tax::find($taxItem->TaxID01);
+					$percentaje = ($tax->Percentage/100) + 1;
+					$multiplicacion = $producto->QuantityPurchased * ($producto->FullPrice * ($percentaje));
+				}else {
+					$multiplicacion = $producto->QuantityPurchased * ($producto->FullPrice);
+				}
+				
 				$total += $multiplicacion;
 			}else {
 				$multiplicacion = $producto->QuantityPurchased * $producto->FullPrice;
@@ -204,7 +210,8 @@ class TransactionHoldCrudController extends CrudController
 				'QuantityPurchased' => $data['item_qty'],
 				'Price' => $data['item_price'],
 				'FullPrice' => $data['item_price'],
-				'Taxable' => False,
+				'Taxable' => true,
+				///agregar item taxid
 				'ItemID' => $data['item_id'],
 				'SalesRepID' => $transactionhold->SalesRepID
 			]);
