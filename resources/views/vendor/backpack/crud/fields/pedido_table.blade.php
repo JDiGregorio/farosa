@@ -363,7 +363,7 @@
 					{ 
 						width: "30%",
 						targets: [3],
-						className: "precio-column text-center",						
+						className: "precio-column text-center"		
 					},
 					{ 
 						width: "5%",

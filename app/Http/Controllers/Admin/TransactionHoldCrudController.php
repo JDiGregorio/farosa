@@ -15,6 +15,7 @@ use App\Models\ItemTax;
 use App\Models\TransactionHold;
 use App\Models\TransactionHoldEntry;
 use App\Authorizable;
+use Illuminate\Support\Facades\DB;
 use View;
 
 class TransactionHoldCrudController extends CrudController
@@ -151,17 +152,17 @@ class TransactionHoldCrudController extends CrudController
 			$disponible = "0.00";
 		}
 		
-		$productos = TransactionHoldEntry::where([['TransactionHoldID','=',$id]])->get();
-		
+		$productos = TransactionHoldEntry::select('TransactionHoldEntry.*', 't.Percentage', DB::raw("ISNULL((t.Percentage/100) + 1, 0) as impuesto"))
+		->leftJoin('ItemTax as it', 'TransactionHoldEntry.ItemTaxID', '=' ,'it.ID')
+		->leftJoin('Tax as t', 'it.TaxID01', '=' ,'t.ID')->where([['TransactionHoldID','=',$id]])
+		->get();
+		//return dd($productos);
 		$total = 0;
-		
 		foreach($productos as $producto){
 			$multiplicacion = $producto->QuantityPurchased * $producto->FullPrice;
 			if($producto->Taxable == 1) {
-				$taxItem = ItemTax::find($producto->ItemTaxID);
-				if ($taxItem) {
-					$tax = Tax::find($taxItem->TaxID01);
-					$percentaje = ($tax->Percentage/100) + 1;
+				if ($producto->Percentage) {
+					$percentaje = ($producto->Percentage/100) + 1;
 					$multiplicacion = $producto->QuantityPurchased * ($producto->FullPrice * ($percentaje));
 				}else {
 					$multiplicacion = $producto->QuantityPurchased * ($producto->FullPrice);

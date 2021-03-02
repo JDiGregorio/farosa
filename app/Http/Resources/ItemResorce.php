@@ -23,7 +23,7 @@ class ItemResorce extends JsonResource
             'PriceB' => $this->PriceB,
             'PriceC' => $this->PriceC,
             'Taxable' => $this->Taxable,
-            'TaxDescription' => $this->tax ? $this->tax->Description: "No Aplica",
+            'TaxDescription' => $this->tax ? $this->tax->Description: "N/A",
             'TaxPorcentage' => $this->tax ? $this->tax->Percentage/100+1 : 1,
             'Quantity' => $this->Quantity
         ];
