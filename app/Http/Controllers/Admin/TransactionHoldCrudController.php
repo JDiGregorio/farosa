@@ -153,10 +153,9 @@ class TransactionHoldCrudController extends CrudController
 		}
 		
 		$productos = TransactionHoldEntry::select('TransactionHoldEntry.*', 't.Percentage', DB::raw("ISNULL((t.Percentage/100) + 1, 0) as impuesto"))
-		->leftJoin('ItemTax as it', 'TransactionHoldEntry.ItemTaxID', '=' ,'it.ID')
-		->leftJoin('Tax as t', 'it.TaxID01', '=' ,'t.ID')->where([['TransactionHoldID','=',$id]])
+		->leftJoin('Item as i', 'TransactionHoldEntry.ItemID', '=' ,'i.ID')
+		->leftJoin('Tax as t', 'i.TaxID', '=' ,'t.ID')->where([['TransactionHoldID','=',$id]])
 		->get();
-		//return dd($productos);
 		$total = 0;
 		foreach($productos as $producto){
 			$multiplicacion = $producto->QuantityPurchased * $producto->FullPrice;
