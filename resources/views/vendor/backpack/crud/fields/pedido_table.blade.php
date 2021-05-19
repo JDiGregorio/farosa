@@ -163,8 +163,9 @@
 					$('input[name="total_pedido"]').val("");
 					
 					$(this.linea_pedido).each(function(key,val){
-						table.row.add([val.ID,val.Description,val.QuantityPurchased,'L. '+val.Price, val.TaxDescription, val.QuantityPurchased * val.Price *  val.TaxPorcentage, '']).draw();
-						total = total + val.QuantityPurchased * val.Price * val.TaxPorcentage;
+						let price = parseFloat(val.Price*0.85).toFixed(2)
+						table.row.add([val.ID,val.Description,val.QuantityPurchased,'L. '+price, val.TaxDescription, val.QuantityPurchased * val.Price *  val.TaxPorcentage, '']).draw();
+						total = total + val.QuantityPurchased * val.Price;
 					});
 					
 					$('input[name="total_pedido"]').val(this.Moneda(total));
