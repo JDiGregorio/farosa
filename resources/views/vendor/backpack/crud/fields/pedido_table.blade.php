@@ -164,10 +164,10 @@
 					
 					$(this.linea_pedido).each(function(key,val){
 						let price = parseFloat(val.Price*0.85).toFixed(2)
-						table.row.add([val.ID,val.Description,val.QuantityPurchased,'L. '+price, val.TaxDescription, val.QuantityPurchased * val.Price *  val.TaxPorcentage, '']).draw();
+						table.row.add([val.ID,val.Description,val.QuantityPurchased,'L. '+price,`L.${val.Price*0.15*val.QuantityPurchased}` , `L.${val.QuantityPurchased * val.Price}`, '']).draw();
 						total = total + val.QuantityPurchased * val.Price;
+						
 					});
-					
 					$('input[name="total_pedido"]').val(this.Moneda(total));
 				}
 				
@@ -203,7 +203,7 @@
 					$('input[name="total_pedido"]').val("");
 					
 					$(this.linea_pedido).each(function(key,val){
-						total = total + val.QuantityPurchased * val.Price * val.TaxPorcentage;
+						total = total + val.QuantityPurchased * val.Price;
 					});
 					$('input[name="total_pedido"]').val(this.Moneda(total));
 				}
