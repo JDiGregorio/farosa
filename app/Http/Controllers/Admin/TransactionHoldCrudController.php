@@ -10,9 +10,12 @@ use Backpack\CRUD\CrudPanel;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Customer;
+use App\Models\Tax;
+use App\Models\ItemTax;
 use App\Models\TransactionHold;
 use App\Models\TransactionHoldEntry;
 use App\Authorizable;
+use Illuminate\Support\Facades\DB;
 use View;
 
 class TransactionHoldCrudController extends CrudController
@@ -150,9 +153,7 @@ class TransactionHoldCrudController extends CrudController
 		}
 		
 		$productos = TransactionHoldEntry::where([['TransactionHoldID','=',$id]])->get();
-		
 		$total = 0;
-		
 		foreach($productos as $producto){
 			$multiplicacion = $producto->QuantityPurchased * $producto->FullPrice;
 			$total += $multiplicacion;
@@ -194,7 +195,8 @@ class TransactionHoldCrudController extends CrudController
 				'QuantityPurchased' => $data['item_qty'],
 				'Price' => $data['item_price'],
 				'FullPrice' => $data['item_price'],
-				'Taxable' => False,
+				'Taxable' => true,
+				///agregar item taxid
 				'ItemID' => $data['item_id'],
 				'SalesRepID' => $transactionhold->SalesRepID
 			]);

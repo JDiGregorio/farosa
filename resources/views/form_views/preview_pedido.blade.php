@@ -30,7 +30,8 @@
 										<th style="font-size: 1.4rem;padding: 10px 5px;">Descripción</th>
 										<th style="font-size: 1.4rem;padding: 10px 5px;">Qty</th>
 										<th style="font-size: 1.4rem;padding: 10px 5px;text-align: center;">Precio</th>
-										<th style="font-size: 1.4rem;padding: 10px 5px;text-align: center;">Total linea</th>
+										<th style="font-size: 1.4rem;padding: 10px 5px;text-align: center;">Impuesto</th>
+										<th style="font-size: 1.4rem;padding: 10px 5px;">SubTotal</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -43,10 +44,14 @@
 												{{ number_format($producto->QuantityPurchased) }}
 											</td> 
 											<td style="font-size: 1.4rem;text-align: right;">
-												L. {{ number_format($producto->FullPrice,2,'.',',') }}
+												L. {{ number_format($producto->FullPrice*0.85,2,'.',',') }}
 											</td>
 											<td style="font-size: 1.4rem;text-align: right;">
-												L. {{ number_format($producto->QuantityPurchased * $producto->FullPrice,2,'.',',') }}
+											L. {{ number_format($producto->FullPrice*0.15*$producto->QuantityPurchased,2,'.',',') }}
+											
+											</td>
+											<td style="font-size: 1.4rem;text-align: right;">
+											L. {{ number_format($producto->QuantityPurchased * $producto->FullPrice,2,'.',',') }}
 											</td>
 										</tr>
 									@endforeach
